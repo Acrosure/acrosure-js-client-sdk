@@ -2,15 +2,5 @@
   "env": {
     "es6": true,
     "browser": true
-  },
-  "extends": ["eslint:recommended", "prettier"],
-  "plugins": ["prettier", "babel"],
-  "rules": {
-    "prettier/prettier": "error",
-    "no-console": "off"
-  },
-  "globals": {
-    "window": true
-  },
-  "parser": "babel-eslint"
+  }
 }
