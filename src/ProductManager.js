@@ -1,20 +1,39 @@
-import 'whatwg-fetch'
-
 /**
- * @classdesc Represents a Product manager.
+ * @classdesc Represents an ProductManager. (You most likely shouldn't be accessing this directly, use {@link AcrosureClient#product} instead.)
  * @class
  */
-class Product {
+class ProductManager {
   /**
-   * Create a ProductManager.
+   * @description Create an product manager.
    * @constructor
    * @param {Object} args - An object consists of several properties.
-   *   @param {string} args.publicKey - A public API key.
-   *   @param {string=} args.productId - A product id.
+   *   @param {function} args.callAPI - A function which call Acrosure API.
    */
   constructor(args) {
-    this.productID = args.productID
+    /**
+     * @member {function}
+     * @description callAPI Function (which should be granted by {@link AcrosureClient#callAPI} )
+     */
+    this.callAPI = args.callAPI
+  }
+
+  /**
+   * @function
+   * @description Get product with the specify id.
+   * @param {string} id - Product id.
+   * @returns {Object} Product
+   */
+  async get(id) {
+    try {
+      if (id) this.id = id
+      const resp = await this.callAPI('/products/get', {
+        product_id: this.id
+      })
+      return resp
+    } catch (err) {
+      throw err
+    }
   }
 }
 
-export default Product
+export default ProductManager
