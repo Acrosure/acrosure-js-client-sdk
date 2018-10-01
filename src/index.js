@@ -1,5 +1,7 @@
 import ApplicationManager from './ApplicationManager'
 import ProductManager from './ProductManager'
+import PolicyManager from './PolicyManager'
+
 import api from './common/api'
 
 /**
@@ -38,12 +40,19 @@ class AcrosureClient {
       id: args.productId,
       callAPI
     })
+    /**
+     * @member {PolicyManager}
+     * @description PolicyManager (You should be using this instead of trying to access {@link PolicyManager} directly)
+     */
+    this.policy = new PolicyManager({
+      callAPI
+    })
   }
 
   /**
    * @function
    * @description Call Acrosure API with corresponding url & current API key.
-   * @param {string} path - API path (without domain).
+   * @param {string} path - An API path.
    * @param {Object} data - A data object which is specified by Acrosure.
    */
   callAPI(path, data) {
