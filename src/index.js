@@ -11,16 +11,16 @@ class AcrosureClient {
    * @description Create an AcrosureClient.
    * @constructor
    * @param {Object} args - An object consists of several properties.
-   *   @param {string} args.publicKey - A public API key.
+   *   @param {string} args.token - An access token.
    *   @param {string=} args.productId - A product id.
    *   @param {string=} args.applicationId - An application id.
    */
   constructor(args) {
     /**
      * @member {string}
-     * @description Public API Key
+     * @description Access token (or API Key)
      */
-    this.publicKey = args.publicKey
+    this.token = args.token
     const callAPI = (path, data) => this.callAPI(path, data)
     /**
      * @member {ApplicationManager}
@@ -47,7 +47,7 @@ class AcrosureClient {
    * @param {Object} data - A data object which is specified by Acrosure.
    */
   callAPI(path, data) {
-    return api(path, data, this.publicKey)
+    return api(path, data, this.token)
   }
 }
 

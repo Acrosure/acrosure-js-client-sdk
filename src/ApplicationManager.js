@@ -34,7 +34,25 @@ class ApplicationManager {
 
   /**
    * @function
-   * @description Create an application and change {@link #id} if possible.
+   * @description Get an application with specify id or with current id.
+   * @param {string=} id - An application id.
+   * @returns {Object} An application
+   */
+  async get(id) {
+    try {
+      if (id) this.id = id
+      const resp = await this.callAPI('/web/applications/get', {
+        application_id: this.id
+      })
+      return resp
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * @function
+   * @description Create an application and change {@link ApplicationManager#id} if possible.
    * @param {Object} args - An object consists of several properties.
    *   @param {string} args.productId - A product id.
    *   @param {Object=} args.basicData - basic_data
@@ -52,9 +70,6 @@ class ApplicationManager {
     attachments,
     packageCode
   }) {
-    if (productId) {
-      this.productId = productId
-    }
     try {
       const resp = await this.callAPI('/web/applications/create', {
         product_id: productId,
@@ -93,9 +108,6 @@ class ApplicationManager {
     attachments,
     packageCode
   }) {
-    if (productId) {
-      this.productId = productId
-    }
     try {
       const resp = await this.callAPI('/web/applications/update', {
         application_id: this.id,
@@ -156,6 +168,22 @@ class ApplicationManager {
   async submit() {
     try {
       const resp = await this.callAPI('/web/applications/submit', {
+        application_id: this.id
+      })
+      return resp
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * @function
+   * @description Confirm current application.
+   * @returns {Object} Confirmed application
+   */
+  async confirm() {
+    try {
+      const resp = await this.callAPI('/applications/confirm', {
         application_id: this.id
       })
       return resp

@@ -20,9 +20,6 @@ const api = async (path, body, publicKey) => {
       throw new Error('no response')
     }
     const data = await response.json()
-    if (response.status !== 200 || data.status !== 'ok') {
-      throw data
-    }
     return data.data
   } catch (err) {
     console.warn(err)

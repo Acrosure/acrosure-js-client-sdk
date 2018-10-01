@@ -1,6 +1,7 @@
 export const TEST_PUBLIC_KEY = 'tokn_sample_public'
+export const TEST_SECRET_KEY = 'tokn_sample_secret'
 
-export const CONTRACTOR_DATA = {
+export const SUBMIT_APP_DATA = {
   productId: 'prod_contractor',
   basicData: {
     contract_value: 10000000,
@@ -9,6 +10,7 @@ export const CONTRACTOR_DATA = {
     project_type: 'Residential',
     contractor_grade: 'A'
   },
+  packageOptions: null,
   additionalData: {
     principal: {
       name: 'บริษัท ผู้ว่าจ้าง จำกัด',
@@ -80,5 +82,52 @@ export const CONTRACTOR_DATA = {
     payment_type: 'ONLINE',
     policy_code: '',
     files: null
+  }
+}
+
+export const CONFIRM_APP_DATA = {
+  productId: 'prod_fire',
+  basicData: {
+    building_area_sq_m: 100,
+    building_material: 'FULL_CONCRETE',
+    building_type: 'SINGLE_HOUSE',
+    coverage_year: 1,
+    effective_date: '0001-01-01'
+  },
+  packageOptions: null,
+  additionalData: {
+    is_insured_building_owner: true,
+    building_address: {
+      address_no: '1',
+      moo: '2',
+      village: 'วิลเลจ 3',
+      alley: '',
+      lane: 'ลาดพร้าว 4',
+      street: 'ลาดพร้าว',
+      minor_district: '',
+      subdistrict: 'จอมพล',
+      district: 'จตุจักร',
+      province: 'กรุงเทพมหานคร',
+      postal_code: '10900'
+    },
+    building_roof_structure: 'เหล็ก',
+    building_roof_type: 'กระเบื้อง',
+    building_second_floor_type: '',
+    building_total_floors: 2,
+    insured_person: {
+      type: '1',
+      title: 'นาย',
+      first_name: 'มานะ',
+      last_name: 'มุ่งมั่น',
+      birthdate: '1988-10-14',
+      id_card: '1489900087857',
+      branch_name: '',
+      address: null,
+      phone: '0861234567',
+      email: 'customer@example.com',
+      custom_beneficiary: false,
+      beneficiary_person: null
+    },
+    other_insured_person_1: null
   }
 }
