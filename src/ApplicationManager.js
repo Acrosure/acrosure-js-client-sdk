@@ -1,5 +1,5 @@
 /**
- * @classdesc Represents an ApplicationManager. (You most likely shouldn't be accessing this directly, instead use {@link AcrosureClient#application} instead.)
+ * @classdesc Represents an ApplicationManager. (You most likely shouldn't be accessing this directly, use {@link AcrosureClient#application} instead.)
  * @class
  */
 class ApplicationManager {
@@ -92,16 +92,14 @@ class ApplicationManager {
    * @function
    * @description Update an application.
    * @param {Object} args - An object consists of several properties.
-   *   @param {string} args.productId - A product id.
    *   @param {Object=} args.basicData - basic_data
    *   @param {Object=} args.packageOptions - package_options
    *   @param {Object=} args.additionalData - additional_data
    *   @param {Array=} args.attachments - A list of files.
    *   @param {string=} args.packageCode - A string of package_code.
-   * @returns {Object} Created application
+   * @returns {Object} Updated application
    */
   async update({
-    productId,
     basicData,
     packageOptions,
     additionalData,
@@ -111,7 +109,6 @@ class ApplicationManager {
     try {
       const resp = await this.callAPI('/web/applications/update', {
         application_id: this.id,
-        product_id: productId,
         basic_data: basicData,
         package_options: packageOptions,
         additional_data: additionalData,
@@ -149,8 +146,7 @@ class ApplicationManager {
    */
   async selectPackage({ packageCode }) {
     try {
-      // TODO: change to /select-package when backend is done
-      const resp = await this.callAPI('/web/applications/update', {
+      const resp = await this.callAPI('/web/applications/select-package', {
         application_id: this.id,
         package_code: packageCode
       })
