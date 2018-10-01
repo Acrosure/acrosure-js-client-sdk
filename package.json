@@ -7,13 +7,17 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "babel src --out-dir dist --source-maps",
-    "gen-doc": "jsdoc src"
+    "doc": "jsdoc src",
+    "doc:watch": "nodemon --watch src --exec 'yarn run doc'",
+    "test": "jest",
+    "test:watch": "nodemon --watch src --watch tests --exec 'yarn run test'"
   },
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
@@ -21,6 +25,7 @@
     "eslint": "^5.6.0",
     "eslint-plugin-babel": "^5.2.1",
     "eslint-plugin-import": "^2.14.0",
+    "jest": "^23.6.0",
     "jsdoc": "^3.5.5",
     "whatwg-fetch": "^3.0.0"
   },

@@ -1,31 +1,32 @@
 import 'whatwg-fetch'
 
-const API_URL = 'https://api.phantompage.com'
+// const API_URL = 'https://api.phantompage.com'
+const API_URL = 'http://localhost:8000'
 
 const api = async (path, body, publicKey) => {
   try {
     const headers = {
-      Accept: 'application/json',
       'Content-Type': 'application/json'
     }
     if (publicKey) {
       headers.Authorization = `Bearer ${publicKey}`
     }
-
     const response = await fetch(`${API_URL}${path}`, {
       method: 'POST',
       headers,
-      body
+      body: JSON.stringify(body)
     })
-    console.log('>>> publicKey', publicKey)
-    const data = await response.data
-
+    if (!response) {
+      throw new Error('no response')
+    }
+    const data = await response.json()
     if (response.status !== 200 || data.status !== 'ok') {
       throw data
     }
     return data.data
   } catch (err) {
-    if (err.response) {
+    console.warn(err)
+    if (err && err.response) {
       if (err.response.data) {
         throw err.response.data
       }

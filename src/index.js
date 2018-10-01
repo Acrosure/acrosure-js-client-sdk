@@ -46,7 +46,7 @@ class AcrosureClient {
    * @param {string} path - API path (without domain).
    * @param {Object} data - A data object which is specified by Acrosure.
    */
-  callAPI = (path, data) => {
+  callAPI(path, data) {
     return api(path, data, this.publicKey)
   }
 }
