@@ -3,13 +3,13 @@ import 'whatwg-fetch'
 // const API_URL = 'https://api.phantompage.com'
 const API_URL = 'http://localhost:8000'
 
-const api = async (path, body, publicKey) => {
+const api = async (path, body, token) => {
   try {
     const headers = {
       'Content-Type': 'application/json'
     }
-    if (publicKey) {
-      headers.Authorization = `Bearer ${publicKey}`
+    if (token) {
+      headers.Authorization = `Bearer ${token}`
     }
     const response = await fetch(`${API_URL}${path}`, {
       method: 'POST',
@@ -20,7 +20,8 @@ const api = async (path, body, publicKey) => {
       throw new Error('no response')
     }
     const data = await response.json()
-    return data.data
+    if (data.data) return data.data
+    return data
   } catch (err) {
     console.warn(err)
     if (err && err.response) {

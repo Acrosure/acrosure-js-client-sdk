@@ -37,12 +37,11 @@ describe('application with SUBMIT flow', () => {
 
   it('update application with basic data', async () => {
     const updatedApp = await application.update({
-      productId: SUBMIT_APP_DATA.productId,
       basicData: SUBMIT_APP_DATA.basicData
     })
     expect(updatedApp).toBeDefined()
     expect(updatedApp.id).toBeDefined()
-    expect(updatedApp.status).toBe('INITIAL')
+    expect(updatedApp.status).toBe('PACKAGE_REQUIRED')
   })
 
   let packages = []
@@ -55,10 +54,10 @@ describe('application with SUBMIT flow', () => {
 
   it('select package', async () => {
     const firstPackage = packages[0]
-    const updatedApp = await application.selectPackage({
+    const updatedApp = await application.update({
       packageCode: firstPackage.package_code
     })
-    expect(updatedApp.status).toBe('INITIAL')
+    expect(updatedApp.status).toBe('DATA_REQUIRED')
   })
 
   it(
@@ -109,12 +108,11 @@ describe('application with CONFIRM flow', () => {
 
   it('update application with basic data', async () => {
     const updatedApp = await application.update({
-      productId: CONFIRM_APP_DATA.productId,
       basicData: CONFIRM_APP_DATA.basicData
     })
     expect(updatedApp).toBeDefined()
     expect(updatedApp.id).toBeDefined()
-    expect(updatedApp.status).toBe('INITIAL')
+    expect(updatedApp.status).toBe('PACKAGE_REQUIRED')
   })
 
   let packages = []
@@ -131,10 +129,10 @@ describe('application with CONFIRM flow', () => {
 
   it('select package', async () => {
     const firstPackage = packages[0]
-    const updatedApp = await application.selectPackage({
+    const updatedApp = await application.update({
       packageCode: firstPackage.package_code
     })
-    expect(updatedApp.status).toBe('INITIAL')
+    expect(updatedApp.status).toBe('DATA_REQUIRED')
   })
 
   it('update application with completed data', async () => {

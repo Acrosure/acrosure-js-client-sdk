@@ -21,6 +21,10 @@ class ApplicationManager {
      * @description callAPI Function (which should be granted by {@link AcrosureClient#callAPI} )
      */
     this.callAPI = args.callAPI
+    /**
+     * @var {string} status
+     * @description Current application status.
+     */
   }
 
   /**
@@ -44,6 +48,7 @@ class ApplicationManager {
       const resp = await this.callAPI('/web/applications/get', {
         application_id: this.id
       })
+      if (resp.status) this.status = resp.status
       return resp
     } catch (err) {
       throw err
@@ -79,9 +84,9 @@ class ApplicationManager {
         attachments,
         package_code: packageCode
       })
-      if (resp.id) {
-        this.id = resp.id
-      }
+      if (!resp) throw new Error('no response')
+      if (resp.id) this.id = resp.id
+      if (resp.status) this.status = resp.status
       return resp
     } catch (err) {
       throw err
@@ -115,6 +120,7 @@ class ApplicationManager {
         attachments,
         package_code: packageCode
       })
+      if (resp.status) this.status = resp.status
       return resp
     } catch (err) {
       throw err
@@ -166,6 +172,7 @@ class ApplicationManager {
       const resp = await this.callAPI('/web/applications/submit', {
         application_id: this.id
       })
+      if (resp.status) this.status = resp.status
       return resp
     } catch (err) {
       throw err
@@ -182,6 +189,7 @@ class ApplicationManager {
       const resp = await this.callAPI('/applications/confirm', {
         application_id: this.id
       })
+      if (resp.status) this.status = resp.status
       return resp
     } catch (err) {
       throw err
