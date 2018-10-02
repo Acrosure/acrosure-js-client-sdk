@@ -1,7 +1,7 @@
 {
-  "name": "@acrosure/acrosure-js-client-sdk",
+  "name": "@acrosure/js-sdk",
   "version": "0.0.1",
-  "description": "Acrosure JavaScript Client-side SDK",
+  "description": "Acrosure JavaScript SDK",
   "author": "Acrosure",
   "license": "MIT",
   "main": "./dist/index.js",
