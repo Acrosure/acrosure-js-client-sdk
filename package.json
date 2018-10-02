@@ -27,6 +27,7 @@
     "eslint-plugin-import": "^2.14.0",
     "jest": "^23.6.0",
     "jsdoc": "^3.5.5",
+    "nodemon": "^1.18.4",
     "whatwg-fetch": "^3.0.0"
   },
   "dependencies": {}
