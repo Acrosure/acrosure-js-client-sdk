@@ -54,10 +54,15 @@ describe('application with SUBMIT flow', () => {
 
   it('select package', async () => {
     const firstPackage = packages[0]
-    const updatedApp = await application.update({
+    const updatedApp = await application.selectPackage({
       packageCode: firstPackage.package_code
     })
     expect(updatedApp.status).toBe('DATA_REQUIRED')
+  })
+
+  it('get current package', async () => {
+    const currentPackage = await application.getPackage()
+    expect(currentPackage).toBeInstanceOf(Object)
   })
 
   it(
@@ -70,7 +75,6 @@ describe('application with SUBMIT flow', () => {
       })
       expect(updatedApp).toBeDefined()
       expect(updatedApp.id).toBeDefined()
-      // TODO: change to corresponds with backend
       expect(updatedApp.status).toBe('READY')
     },
     10000
@@ -80,7 +84,6 @@ describe('application with SUBMIT flow', () => {
     const submittedApp = await application.submit()
     expect(submittedApp).toBeDefined()
     expect(submittedApp.id).toBeDefined()
-    // TODO: change to corresponds with backend
     expect(submittedApp.status).toBe('SUBMITTED')
   })
 })
@@ -129,10 +132,15 @@ describe('application with CONFIRM flow', () => {
 
   it('select package', async () => {
     const firstPackage = packages[0]
-    const updatedApp = await application.update({
+    const updatedApp = await application.selectPackage({
       packageCode: firstPackage.package_code
     })
     expect(updatedApp.status).toBe('DATA_REQUIRED')
+  })
+
+  it('get current package', async () => {
+    const currentPackage = await application.getPackage()
+    expect(currentPackage).toBeInstanceOf(Object)
   })
 
   it('update application with completed data', async () => {
@@ -143,7 +151,6 @@ describe('application with CONFIRM flow', () => {
     })
     expect(updatedApp).toBeDefined()
     expect(updatedApp.id).toBeDefined()
-    // TODO: change to corresponds with backend
     expect(updatedApp.status).toBe('READY')
   })
 
@@ -158,7 +165,6 @@ describe('application with CONFIRM flow', () => {
       const confirmedApp = await userApplication.confirm()
       expect(confirmedApp).toBeDefined()
       expect(confirmedApp.id).toBeDefined()
-      // TODO: change to corresponds with backend
       expect(confirmedApp.status).toBe('CONFIRMING')
     },
     30000
