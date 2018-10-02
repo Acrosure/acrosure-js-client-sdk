@@ -78,7 +78,7 @@ export const SUBMIT_APP_DATA = {
     project_expiry_date: '2019-10-01T00:00:00+07:00',
     project_duration: 365,
     warranty_duration: 5,
-    warranty_expiry_date: '0001-01-01T00:00:00Z',
+    warranty_expiry_date: '2018-10-06T00:00:00Z',
     payment_type: 'ONLINE',
     policy_code: '',
     files: null
@@ -92,7 +92,7 @@ export const CONFIRM_APP_DATA = {
     building_material: 'FULL_CONCRETE',
     building_type: 'SINGLE_HOUSE',
     coverage_year: 1,
-    effective_date: '0001-01-01'
+    effective_date: '2018-10-02'
   },
   packageOptions: null,
   additionalData: {
