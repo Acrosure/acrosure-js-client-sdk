@@ -1,7 +1,7 @@
 import AcrosureClient from '../src'
 import ProductManager from '../src/ProductManager'
 
-import { TEST_PUBLIC_KEY, TEST_SECRET_KEY } from './const'
+import { TEST_PUBLIC_KEY } from './const'
 
 const TEST_PRODUCT_ID = 'prod_contractor'
 
