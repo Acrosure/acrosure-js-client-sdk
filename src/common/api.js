@@ -14,7 +14,7 @@ const api = async (path, body, token) => {
     const response = await fetch(`${API_URL}${path}`, {
       method: 'POST',
       headers,
-      body: JSON.stringify(body)
+      body: body ? JSON.stringify(body) : '{}'
     })
     if (!response) {
       throw new Error('no response')
