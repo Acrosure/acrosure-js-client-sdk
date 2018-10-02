@@ -82,6 +82,11 @@ class ApplicationManager {
    *   @param {Object=} args.additionalData - Application's additional_data.
    *   @param {Array=} args.attachments - A list of files.
    *   @param {string=} args.packageCode - A string of package_code.
+   *   @param {string=} args.ref1 - A string of reference #1.
+   *   @param {string=} args.ref2 - A string of reference #2.
+   *   @param {string=} args.ref3 - A string of reference #3.
+   *   @param {string=} args.groupPolicyID - A string of group policy id.
+   *   @param {int=} args.step - A number of current step.
    * @returns {Object} Created application
    */
   async create({
@@ -90,7 +95,12 @@ class ApplicationManager {
     packageOptions,
     additionalData,
     attachments,
-    packageCode
+    packageCode,
+    ref1,
+    ref2,
+    ref3,
+    groupPolicyID,
+    step
   }) {
     try {
       const resp = await this.callAPI('/web/applications/create', {
@@ -99,7 +109,12 @@ class ApplicationManager {
         package_options: packageOptions,
         additional_data: additionalData,
         attachments,
-        package_code: packageCode
+        package_code: packageCode,
+        ref1,
+        ref2,
+        ref3,
+        group_policy_id: groupPolicyID,
+        step
       })
       if (!resp) throw new Error('no response')
       if (resp.id) this.id = resp.id
@@ -120,6 +135,11 @@ class ApplicationManager {
    *   @param {Object=} args.additionalData - Application's additional_data.
    *   @param {Array=} args.attachments - A list of files.
    *   @param {string=} args.packageCode - A string of package_code.
+   *   @param {string=} args.ref1 - A string of reference #1.
+   *   @param {string=} args.ref2 - A string of reference #2.
+   *   @param {string=} args.ref3 - A string of reference #3.
+   *   @param {string=} args.groupPolicyID - A string of group policy id.
+   *   @param {int=} args.step - A number of current step.
    * @returns {Object} Updated application
    */
   async update({
@@ -128,7 +148,12 @@ class ApplicationManager {
     packageOptions,
     additionalData,
     attachments,
-    packageCode
+    packageCode,
+    ref1,
+    ref2,
+    ref3,
+    groupPolicyID,
+    step
   }) {
     try {
       if (applicationId) {
@@ -140,7 +165,12 @@ class ApplicationManager {
         package_options: packageOptions,
         additional_data: additionalData,
         attachments,
-        package_code: packageCode
+        package_code: packageCode,
+        ref1,
+        ref2,
+        ref3,
+        group_policy_id: groupPolicyID,
+        step
       })
       if (resp.status) this.status = resp.status
       return resp
