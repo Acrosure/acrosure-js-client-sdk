@@ -9,7 +9,7 @@ import {
 } from './const'
 
 describe('application with SUBMIT flow', () => {
-  let application = null
+  let application
 
   it('create an instance of AcrosureClient', () => {
     const client = new AcrosureClient({
@@ -86,7 +86,7 @@ describe('application with SUBMIT flow', () => {
 })
 
 describe('application with CONFIRM flow', () => {
-  let application = null
+  let application
 
   it('create an instance of AcrosureClient', () => {
     const client = new AcrosureClient({
