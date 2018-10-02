@@ -17,14 +17,10 @@ class ProductManager {
      */
     this.callAPI = args.callAPI
     /**
-     * @member {function}
+     * @member {string}
      * @description Current product id.
      */
     this.id = args.id
-    /**
-     * @var {Object} formItems
-     * @description An object of current product form items.
-     */
   }
 
   /**
@@ -48,7 +44,6 @@ class ProductManager {
       const resp = await this.callAPI('/products/get', {
         product_id: this.id
       })
-      this.formItems = this.mapProductFormItems(resp.form_items)
       return resp
     } catch (err) {
       throw err
@@ -57,38 +52,17 @@ class ProductManager {
 
   /**
    * @function
-   * @description Get product's form items of current product or newly specify product id.
-   * @param {string=} id - Product id.
-   * @returns {Object} Product form items
+   * @description Get products list with or without query.
+   * @param {Object} args - Query object (See Acrosure API document for more detail).
+   * @returns {Array} Products
    */
-  async getFormItems(id) {
-    if (this.formItems) return this.formItems
-    if (!this.id && !id) {
-      throw new Error('No product id')
-    }
+  async list(args) {
     try {
-      if (id) this.id = id
-      const resp = await this.callAPI('/products/get', {
-        product_id: this.id
-      })
-      this.formItems = this.mapProductFormItems(resp.form_items)
-      return this.formItems
+      const resp = await this.callAPI('/products/list', args)
+      return resp
     } catch (err) {
       throw err
     }
-  }
-
-  mapProductFormItems(fields) {
-    const items = {}
-    forEach(fields, o => {
-      if (o.values) {
-        items[o.key] = o.values
-      }
-      if (o.fields) {
-        items[o.key] = this.mapProductFormItems(o.fields)
-      }
-    })
-    return items
   }
 }
 
