@@ -47,7 +47,7 @@ class ApplicationManager {
   async get(id) {
     try {
       if (id) this.id = id
-      const resp = await this.callAPI('/web/applications/get', {
+      const resp = await this.callAPI('/applications/get', {
         application_id: this.id
       })
       if (resp.status) this.status = resp.status
@@ -103,7 +103,7 @@ class ApplicationManager {
     step
   }) {
     try {
-      const resp = await this.callAPI('/web/applications/create', {
+      const resp = await this.callAPI('/applications/create', {
         product_id: productId,
         basic_data: basicData,
         package_options: packageOptions,
@@ -159,7 +159,7 @@ class ApplicationManager {
       if (applicationId) {
         this.id = applicationId
       }
-      const resp = await this.callAPI('/web/applications/update', {
+      const resp = await this.callAPI('/applications/update', {
         application_id: this.id,
         basic_data: basicData,
         package_options: packageOptions,
@@ -186,7 +186,7 @@ class ApplicationManager {
    */
   async getPackages() {
     try {
-      const resp = await this.callAPI('/web/applications/get-packages', {
+      const resp = await this.callAPI('/applications/get-packages', {
         application_id: this.id
       })
       return resp
@@ -202,7 +202,7 @@ class ApplicationManager {
    */
   async getPackage() {
     try {
-      const resp = await this.callAPI('/web/applications/get-package', {
+      const resp = await this.callAPI('/applications/get-package', {
         application_id: this.id
       })
       return resp
@@ -220,7 +220,7 @@ class ApplicationManager {
    */
   async selectPackage({ packageCode }) {
     try {
-      const resp = await this.callAPI('/web/applications/select-package', {
+      const resp = await this.callAPI('/applications/select-package', {
         application_id: this.id,
         package_code: packageCode
       })
@@ -237,7 +237,7 @@ class ApplicationManager {
    */
   async submit() {
     try {
-      const resp = await this.callAPI('/web/applications/submit', {
+      const resp = await this.callAPI('/applications/submit', {
         application_id: this.id
       })
       if (resp.status) this.status = resp.status
