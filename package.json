@@ -7,7 +7,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "babel src --out-dir dist --source-maps",
-    "doc": "jsdoc src",
+    "doc": "jsdoc src -d docs",
     "doc:watch": "nodemon --watch src --exec 'yarn run doc'",
     "test": "jest",
     "test:watch": "nodemon --watch src --watch tests --exec 'yarn run test'"
