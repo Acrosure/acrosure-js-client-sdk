@@ -22,9 +22,11 @@ class ApplicationManager {
      */
     this.callAPI = args.callAPI
     /**
-     * @var {string} status
-     * @description Current application status.
+     * @member {string}
+     * @protected
+     * @description Current application status
      */
+    this.status = null
   }
 
   /**
@@ -57,12 +59,27 @@ class ApplicationManager {
 
   /**
    * @function
+   * @description Get applications list with or without query.
+   * @param {Object} args - Query object (See Acrosure API document for more detail).
+   * @returns {Array} Applications
+   */
+  async list(args) {
+    try {
+      const resp = await this.callAPI('/applications/list', args)
+      return resp
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * @function
    * @description Create an application and change {@link ApplicationManager#id} if possible.
    * @param {Object} args - An object consists of several properties.
    *   @param {string} args.productId - A product id.
-   *   @param {Object=} args.basicData - basic_data
-   *   @param {Object=} args.packageOptions - package_options
-   *   @param {Object=} args.additionalData - additional_data
+   *   @param {Object=} args.basicData - Application's basic_data.
+   *   @param {Object=} args.packageOptions - Application's package_options.
+   *   @param {Object=} args.additionalData - Application's additional_data.
    *   @param {Array=} args.attachments - A list of files.
    *   @param {string=} args.packageCode - A string of package_code.
    * @returns {Object} Created application
@@ -95,16 +112,18 @@ class ApplicationManager {
 
   /**
    * @function
-   * @description Update an application.
+   * @description Update current application or with specified id.
    * @param {Object} args - An object consists of several properties.
-   *   @param {Object=} args.basicData - basic_data
-   *   @param {Object=} args.packageOptions - package_options
-   *   @param {Object=} args.additionalData - additional_data
+   *   @param {string=} args.applicationId - An application id.
+   *   @param {Object=} args.basicData - Application's basic_data.
+   *   @param {Object=} args.packageOptions - Application's package_options.
+   *   @param {Object=} args.additionalData - Application's additional_data.
    *   @param {Array=} args.attachments - A list of files.
    *   @param {string=} args.packageCode - A string of package_code.
    * @returns {Object} Updated application
    */
   async update({
+    applicationId,
     basicData,
     packageOptions,
     additionalData,
@@ -112,6 +131,9 @@ class ApplicationManager {
     packageCode
   }) {
     try {
+      if (applicationId) {
+        this.id = applicationId
+      }
       const resp = await this.callAPI('/web/applications/update', {
         application_id: this.id,
         basic_data: basicData,
@@ -135,6 +157,22 @@ class ApplicationManager {
   async getPackages() {
     try {
       const resp = await this.callAPI('/web/applications/get-packages', {
+        application_id: this.id
+      })
+      return resp
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * @function
+   * @description Get current application's package.
+   * @returns {Array} Current application's package
+   */
+  async getPackage() {
+    try {
+      const resp = await this.callAPI('/web/applications/get-package', {
         application_id: this.id
       })
       return resp

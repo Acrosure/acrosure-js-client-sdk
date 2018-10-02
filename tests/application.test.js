@@ -164,3 +164,11 @@ describe('application with CONFIRM flow', () => {
     30000
   )
 })
+
+describe('application remaining endpoints', () => {
+  it('list applications', async () => {
+    const client = new AcrosureClient({ token: TEST_PUBLIC_KEY })
+    const applications = await client.application.list()
+    expect(applications).toBeInstanceOf(Array)
+  })
+})
