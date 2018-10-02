@@ -20,8 +20,10 @@ const api = async (path, body, token) => {
       throw new Error('no response')
     }
     const data = await response.json()
-    if (data.data) return data.data
-    return data
+    if (data.status !== 'ok') {
+      throw data
+    }
+    return data.data
   } catch (err) {
     console.warn(err)
     if (err && err.response) {
