@@ -260,7 +260,7 @@ const values = await acrosureClient.data.get({
 
 ## Advance Usage
 
-Please refer to [this document](https://) for AcrosureClient usage.
+Please refer to [this document](https://acrosure.github.io/acrosure-js-sdk/AcrosureClient.html) for AcrosureClient usage.
 
 And refer to [Acrosure API Document](https://docs.acrosure.com/docs/api-overall.html) for more details on Acrosure API.
 
