@@ -1,6 +1,7 @@
 import ApplicationManager from './ApplicationManager'
 import ProductManager from './ProductManager'
 import PolicyManager from './PolicyManager'
+import DataManager from './DataManager'
 
 import api from './common/api'
 
@@ -45,6 +46,13 @@ class AcrosureClient {
      * @description PolicyManager (You should be using this instead of trying to access {@link PolicyManager} directly)
      */
     this.policy = new PolicyManager({
+      callAPI
+    })
+    /**
+     * @member {DataManager}
+     * @description DataManager (You should be using this instead of trying to access {@link DataManager} directly)
+     */
+    this.data = new DataManager({
       callAPI
     })
   }
