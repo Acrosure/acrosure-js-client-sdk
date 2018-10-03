@@ -1,12 +1,13 @@
 {
   "name": "@acrosure/js-sdk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Acrosure JavaScript SDK",
   "author": "Acrosure",
   "license": "MIT",
   "main": "./dist/index.js",
   "scripts": {
     "build": "babel src --out-dir dist --source-maps",
+    "prepublish": "yarn build",
     "doc": "jsdoc src -d docs",
     "doc:watch": "nodemon --watch src --exec 'yarn run doc'",
     "test": "jest",
