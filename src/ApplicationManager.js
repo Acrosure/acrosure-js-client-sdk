@@ -34,7 +34,7 @@ class ApplicationManager {
    * @description Set current application id.
    * @param {Object} id - An application id.
    */
-  setID(id) {
+  setId(id) {
     this.id = id
   }
 

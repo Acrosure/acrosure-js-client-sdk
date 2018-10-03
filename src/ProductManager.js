@@ -28,7 +28,7 @@ class ProductManager {
    * @description Set current product id.
    * @param {Object} id - A product id.
    */
-  setID(id) {
+  setId(id) {
     this.id = id
   }
 

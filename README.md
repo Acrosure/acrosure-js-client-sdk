@@ -44,11 +44,11 @@ AcrosureClient provides several objects such as `application`, `product`, etc. a
 Set application id for later uses.
 
 ```javascript
-acrosureClient.application.setID('<application_id>')
+acrosureClient.application.setId('<application_id>')
 
 // ...
 
-const applicationID = acrosureClient.application.id
+const applicationId = acrosureClient.application.id
 ```
 
 #### Get
@@ -60,7 +60,7 @@ const application = acrosureClient.application.get('<application_id>')
 
 // ...
 
-const applicationID = acrosureClient.application.id
+const applicationId = acrosureClient.application.id
 ```
 
 Get current application.
@@ -164,11 +164,11 @@ const applications = await acrosureClient.application.list(query)
 Set product id for later uses.
 
 ```javascript
-acrosureClient.product.setID('<product_id>')
+acrosureClient.product.setId('<product_id>')
 
 // ...
 
-const productID = acrosureClient.product.id
+const productId = acrosureClient.product.id
 ```
 
 #### Get
@@ -180,7 +180,7 @@ const product = acrosureClient.product.get('<product_id>')
 
 // ...
 
-const productID = acrosureClient.product.id
+const productId = acrosureClient.product.id
 ```
 
 Get current product.
@@ -205,11 +205,11 @@ const products = await acrosureClient.product.list(query)
 Set policy id for later uses.
 
 ```javascript
-acrosureClient.policy.setID('<policy_id>')
+acrosureClient.policy.setId('<policy_id>')
 
 // ...
 
-const policyID = acrosureClient.policy.id
+const policyId = acrosureClient.policy.id
 ```
 
 #### Get
@@ -221,7 +221,7 @@ const policy = acrosureClient.policy.get('<policy_id>')
 
 // ...
 
-const policyID = acrosureClient.policy.id
+const policyId = acrosureClient.policy.id
 ```
 
 Get current policy.

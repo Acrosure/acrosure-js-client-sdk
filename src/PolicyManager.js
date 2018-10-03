@@ -28,7 +28,7 @@ class PolicyManager {
    * @description Set current policy id.
    * @param {Object} id - A policy id.
    */
-  setID(id) {
+  setId(id) {
     this.id = id
   }
 
