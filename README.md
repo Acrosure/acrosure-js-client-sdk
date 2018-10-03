@@ -1,6 +1,8 @@
 # Acrosure JavaScript SDK
 
-The official Acrosure SDK for JavaScript.
+![Acrosure](./static/Acrosure-color.png)
+
+JavaScript SDK for connecting with Acrosure Insurance Gateway
 
 ## Installation
 
