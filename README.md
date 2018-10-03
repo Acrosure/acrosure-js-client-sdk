@@ -289,6 +289,7 @@ And refer to [Acrosure API Document](https://docs.acrosure.com/docs/api-overall.
 /applications/select-package
 /applications/submit
 /applications/confirm
+/applications/get-hash
 ```
 
 ### Product
