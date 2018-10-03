@@ -1,9 +1,12 @@
+import { sha256 } from 'js-sha256'
+
 import ApplicationManager from './ApplicationManager'
 import ProductManager from './ProductManager'
 import PolicyManager from './PolicyManager'
 import DataManager from './DataManager'
 
 import api from './common/api'
+import { isNode } from './common/helpers'
 
 /**
  * @classdesc Represents an Acrosure API client.
@@ -65,6 +68,21 @@ class AcrosureClient {
    */
   callAPI(path, data) {
     return api(path, data, this.token)
+  }
+
+  /**
+   * @function
+   * @description Verify signature in webhook event (Node.js only).
+   * @param {string} signature - A signature received from webhook.
+   * @param {string} data - A string of raw data.
+   * @returns {bool} Whether the signature is valid or not.
+   */
+  verifySignature(signature, data) {
+    if (!isNode()) {
+      throw new Error('Only available on Node.js enviroment')
+    }
+    const expected = sha256.hmac(this.token, data)
+    return signature === expected
   }
 }
 
