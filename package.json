@@ -1,13 +1,13 @@
 {
   "name": "@acrosure/js-sdk",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Acrosure JavaScript SDK",
   "author": "Acrosure",
   "license": "MIT",
   "main": "./dist/index.js",
   "scripts": {
     "build": "babel src --out-dir dist --source-maps && yarn run webpack",
-    "prepublish": "yarn run build",
+    "prepare": "yarn run build",
     "doc": "jsdoc src -d docs",
     "doc:watch": "nodemon --watch src --exec 'yarn run doc'",
     "test": "jest",
@@ -20,6 +20,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
