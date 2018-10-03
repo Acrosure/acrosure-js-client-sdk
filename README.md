@@ -271,6 +271,20 @@ const values = await acrosureClient.data.get({
 })
 ```
 
+### Other functionality
+
+#### Verify webhook signature
+
+Verify webhook signature by specify signature and raw data string. (Only Node.js environment)
+
+```javascript
+// acrosureClient.token must be specified
+const isSignatureValid = acrosureClient.verifyWebhook(
+  '<signature>',
+  '<raw_data>'
+)
+```
+
 ## Advanced Usage
 
 Please refer to [this document](https://acrosure.github.io/acrosure-js-sdk/AcrosureClient.html) for AcrosureClient usage.
