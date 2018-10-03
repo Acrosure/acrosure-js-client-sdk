@@ -129,6 +129,17 @@ Get selected package of current application.
 const currentPackage = await acrosureClient.application.getPackage()
 ```
 
+#### Redirect to payment page
+
+Redirect user to 2C2P payment page (Browser only).
+
+```javascript
+// acrosureClient.application.id needed to be set
+await acrosureClient.application.redirectToPayment({
+  frontend_url: '<redirect_url>'
+})
+```
+
 #### Submit
 
 Submit current application.

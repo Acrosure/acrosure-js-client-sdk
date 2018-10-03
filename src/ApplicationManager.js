@@ -263,6 +263,63 @@ class ApplicationManager {
       throw err
     }
   }
+
+  /**
+   * @function
+   * @description Redirect to current application's payment page (Browser only).
+   * @param {Object} args - An object consists of several properties.
+   *   @param {string} args.frontend_url - A string of redirect frontend URL.
+   */
+  async redirectToPayment({ frontend_url }) {
+    try {
+      const form = await this.get2C2PForm({ frontend_url })
+      form.submit()
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * @function
+   * @protected
+   * @description Get form element for 2c2p payment (This is being called by {@link ApplicationManager#redirectToPayment}, but it is exposed just in case you need to access the generated form directly).
+   * @param {Object} args - An object consists of several properties.
+   *   @param {string} args.frontend_url - A string of redirect frontend URL.
+   * @returns {Object} An form element
+   */
+  async get2C2PForm({ frontend_url }) {
+    try {
+      const hashForm = await this.get2C2PHash({ frontend_url })
+      if (!document) throw new Error('no document defined')
+      const form = document.createElement('form')
+      form.method = 'POST'
+      form.action = hashForm.payment_url
+      Object.keys(hashForm).forEach(key => {
+        if (key === 'payment_url') return
+        const val = hashForm[key]
+        const el = document.createElement('input')
+        el.value = val
+        el.name = key
+        el.type = 'hidden'
+        form.appendChild(el)
+      })
+      return form
+    } catch (err) {
+      throw err
+    }
+  }
+
+  async get2C2PHash({ frontend_url }) {
+    try {
+      const resp = await this.callAPI('/payments/2c2p/get-hash', {
+        application_id: this.id,
+        frontend_url
+      })
+      return resp
+    } catch (err) {
+      throw err
+    }
+  }
 }
 
 export default ApplicationManager
