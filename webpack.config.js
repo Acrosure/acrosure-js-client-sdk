@@ -4,7 +4,7 @@ module.exports = {
   entry: './dist/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.cdn.js',
+    filename: 'acrosure-sdk.js',
     library: 'AcrosureClient',
     libraryTarget: 'window'
   }
