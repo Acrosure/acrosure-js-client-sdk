@@ -2,16 +2,16 @@ export const TEST_PUBLIC_KEY = 'tokn_sample_public'
 export const TEST_SECRET_KEY = 'tokn_sample_secret'
 
 export const SUBMIT_APP_DATA = {
-  productId: 'prod_contractor',
-  basicData: {
+  product_id: 'prod_contractor',
+  basic_data: {
     contract_value: 10000000,
     existing_property_value: 3000000,
     gross_floor_area: 15000,
     project_type: 'Residential',
     contractor_grade: 'A'
   },
-  packageOptions: null,
-  additionalData: {
+  package_options: null,
+  additional_data: {
     principal: {
       name: 'บริษัท ผู้ว่าจ้าง จำกัด',
       address: {
@@ -86,16 +86,16 @@ export const SUBMIT_APP_DATA = {
 }
 
 export const CONFIRM_APP_DATA = {
-  productId: 'prod_fire',
-  basicData: {
+  product_id: 'prod_fire',
+  basic_data: {
     building_area_sq_m: 100,
     building_material: 'FULL_CONCRETE',
     building_type: 'SINGLE_HOUSE',
     coverage_year: 1,
     effective_date: '2018-10-02'
   },
-  packageOptions: null,
-  additionalData: {
+  package_options: null,
+  additional_data: {
     is_insured_building_owner: true,
     building_address: {
       address_no: '1',

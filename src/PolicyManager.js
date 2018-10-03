@@ -7,8 +7,8 @@ class PolicyManager {
    * @description Create an policy manager.
    * @constructor
    * @param {Object} args - An object consists of several properties.
-   *   @param {function} args.id - A product id.
    *   @param {function} args.callAPI - A function which call Acrosure API.
+   *   @param {string=} args.id - A policy id.
    */
   constructor(args) {
     /**

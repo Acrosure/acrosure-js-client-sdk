@@ -76,44 +76,44 @@ class ApplicationManager {
    * @function
    * @description Create an application and change {@link ApplicationManager#id} if possible.
    * @param {Object} args - An object consists of several properties.
-   *   @param {string} args.productId - A product id.
-   *   @param {Object=} args.basicData - Application's basic_data.
-   *   @param {Object=} args.packageOptions - Application's package_options.
-   *   @param {Object=} args.additionalData - Application's additional_data.
+   *   @param {string} args.product_id - A product id.
+   *   @param {Object=} args.basic_data - Application's basic_data.
+   *   @param {Object=} args.package_options - Application's package_options.
+   *   @param {Object=} args.additional_data - Application's additional_data.
    *   @param {Array=} args.attachments - A list of files.
-   *   @param {string=} args.packageCode - A string of package_code.
+   *   @param {string=} args.package_code - A string of package_code.
    *   @param {string=} args.ref1 - A string of reference #1.
    *   @param {string=} args.ref2 - A string of reference #2.
    *   @param {string=} args.ref3 - A string of reference #3.
-   *   @param {string=} args.groupPolicyID - A string of group policy id.
+   *   @param {string=} args.group_policy_id - A string of group policy id.
    *   @param {int=} args.step - A number of current step.
    * @returns {Object} Created application
    */
   async create({
-    productId,
-    basicData,
-    packageOptions,
-    additionalData,
+    product_id,
+    basic_data,
+    package_options,
+    additional_data,
     attachments,
-    packageCode,
+    package_code,
     ref1,
     ref2,
     ref3,
-    groupPolicyID,
+    group_policy_id,
     step
   }) {
     try {
       const resp = await this.callAPI('/applications/create', {
-        product_id: productId,
-        basic_data: basicData,
-        package_options: packageOptions,
-        additional_data: additionalData,
+        product_id,
+        basic_data,
+        package_options,
+        additional_data,
         attachments,
-        package_code: packageCode,
+        package_code,
         ref1,
         ref2,
         ref3,
-        group_policy_id: groupPolicyID,
+        group_policy_id,
         step
       })
       if (!resp) throw new Error('no response')
@@ -129,47 +129,47 @@ class ApplicationManager {
    * @function
    * @description Update current application or with specified id.
    * @param {Object} args - An object consists of several properties.
-   *   @param {string=} args.applicationId - An application id.
-   *   @param {Object=} args.basicData - Application's basic_data.
-   *   @param {Object=} args.packageOptions - Application's package_options.
-   *   @param {Object=} args.additionalData - Application's additional_data.
+   *   @param {string=} args.application_id - An application id.
+   *   @param {Object=} args.basic_data - Application's basic_data.
+   *   @param {Object=} args.package_options - Application's package_options.
+   *   @param {Object=} args.additional_data - Application's additional_data.
    *   @param {Array=} args.attachments - A list of files.
-   *   @param {string=} args.packageCode - A string of package_code.
+   *   @param {string=} args.package_code - A string of package_code.
    *   @param {string=} args.ref1 - A string of reference #1.
    *   @param {string=} args.ref2 - A string of reference #2.
    *   @param {string=} args.ref3 - A string of reference #3.
-   *   @param {string=} args.groupPolicyID - A string of group policy id.
+   *   @param {string=} args.group_policy_id - A string of group policy id.
    *   @param {int=} args.step - A number of current step.
    * @returns {Object} Updated application
    */
   async update({
-    applicationId,
-    basicData,
-    packageOptions,
-    additionalData,
+    application_id,
+    basic_data,
+    package_options,
+    additional_data,
     attachments,
-    packageCode,
+    package_code,
     ref1,
     ref2,
     ref3,
-    groupPolicyID,
+    group_policy_id,
     step
   }) {
     try {
-      if (applicationId) {
-        this.id = applicationId
+      if (application_id) {
+        this.id = application_id
       }
       const resp = await this.callAPI('/applications/update', {
         application_id: this.id,
-        basic_data: basicData,
-        package_options: packageOptions,
-        additional_data: additionalData,
+        basic_data,
+        package_options,
+        additional_data,
         attachments,
-        package_code: packageCode,
+        package_code,
         ref1,
         ref2,
         ref3,
-        group_policy_id: groupPolicyID,
+        group_policy_id,
         step
       })
       if (resp.status) this.status = resp.status
@@ -215,14 +215,14 @@ class ApplicationManager {
    * @function
    * @description Select package for current application.
    * @param {Object} args - An object consists of several properties.
-   *   @param {string} args.packageCode - A string of package_code.
+   *   @param {string} args.package_code - A string of package_code.
    * @returns {Object} Updated application
    */
-  async selectPackage({ packageCode }) {
+  async selectPackage({ package_code }) {
     try {
       const resp = await this.callAPI('/applications/select-package', {
         application_id: this.id,
-        package_code: packageCode
+        package_code: package_code
       })
       return resp
     } catch (err) {

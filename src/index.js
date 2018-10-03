@@ -15,8 +15,8 @@ class AcrosureClient {
    * @constructor
    * @param {Object} args - An object consists of several properties.
    *   @param {string} args.token - An access token.
-   *   @param {string=} args.productId - A product id.
-   *   @param {string=} args.applicationId - An application id.
+   *   @param {string=} args.product_id - A product id.
+   *   @param {string=} args.application_id - An application id.
    */
   constructor(args) {
     /**
@@ -30,7 +30,7 @@ class AcrosureClient {
      * @description ApplicationManager (You should be using this instead of trying to access {@link ApplicationManager} directly)
      */
     this.application = new ApplicationManager({
-      id: args.applicationId,
+      id: args.application_id,
       callAPI
     })
     /**
@@ -38,7 +38,7 @@ class AcrosureClient {
      * @description ProductManager (You should be using this instead of trying to access {@link ProductManager} directly)
      */
     this.product = new ProductManager({
-      id: args.productId,
+      id: args.product_id,
       callAPI
     })
     /**

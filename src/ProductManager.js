@@ -7,8 +7,8 @@ class ProductManager {
    * @description Create an product manager.
    * @constructor
    * @param {Object} args - An object consists of several properties.
-   *   @param {function} args.id - A product id.
    *   @param {function} args.callAPI - A function which call Acrosure API.
+   *   @param {string=} args.id - A product id.
    */
   constructor(args) {
     /**

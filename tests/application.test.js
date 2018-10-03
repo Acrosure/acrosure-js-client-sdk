@@ -22,7 +22,7 @@ describe('application with SUBMIT flow', () => {
 
   it('create application with empty data', async () => {
     const createdApp = await application.create({
-      productId: SUBMIT_APP_DATA.productId
+      product_id: SUBMIT_APP_DATA.product_id
     })
     expect(createdApp).toBeDefined()
     expect(createdApp.id).toBeDefined()
@@ -37,7 +37,7 @@ describe('application with SUBMIT flow', () => {
 
   it('update application with basic data', async () => {
     const updatedApp = await application.update({
-      basicData: SUBMIT_APP_DATA.basicData
+      basic_data: SUBMIT_APP_DATA.basic_data
     })
     expect(updatedApp).toBeDefined()
     expect(updatedApp.id).toBeDefined()
@@ -55,7 +55,7 @@ describe('application with SUBMIT flow', () => {
   it('select package', async () => {
     const firstPackage = packages[0]
     const updatedApp = await application.selectPackage({
-      packageCode: firstPackage.package_code
+      package_code: firstPackage.package_code
     })
     expect(updatedApp.status).toBe('DATA_REQUIRED')
   })
@@ -69,9 +69,9 @@ describe('application with SUBMIT flow', () => {
     'update application with completed data',
     async () => {
       const updatedApp = await application.update({
-        basicData: SUBMIT_APP_DATA.basicData,
-        packageOptions: SUBMIT_APP_DATA.packageOptions,
-        additionalData: SUBMIT_APP_DATA.additionalData
+        basic_data: SUBMIT_APP_DATA.basic_data,
+        package_options: SUBMIT_APP_DATA.package_options,
+        additional_data: SUBMIT_APP_DATA.additional_data
       })
       expect(updatedApp).toBeDefined()
       expect(updatedApp.id).toBeDefined()
@@ -102,7 +102,7 @@ describe('application with CONFIRM flow', () => {
 
   it('create application with empty data', async () => {
     const createdApp = await application.create({
-      productId: CONFIRM_APP_DATA.productId
+      product_id: CONFIRM_APP_DATA.product_id
     })
     expect(createdApp).toBeDefined()
     expect(createdApp.id).toBeDefined()
@@ -111,7 +111,7 @@ describe('application with CONFIRM flow', () => {
 
   it('update application with basic data', async () => {
     const updatedApp = await application.update({
-      basicData: CONFIRM_APP_DATA.basicData
+      basic_data: CONFIRM_APP_DATA.basic_data
     })
     expect(updatedApp).toBeDefined()
     expect(updatedApp.id).toBeDefined()
@@ -133,7 +133,7 @@ describe('application with CONFIRM flow', () => {
   it('select package', async () => {
     const firstPackage = packages[0]
     const updatedApp = await application.selectPackage({
-      packageCode: firstPackage.package_code
+      package_code: firstPackage.package_code
     })
     expect(updatedApp.status).toBe('DATA_REQUIRED')
   })
@@ -145,9 +145,9 @@ describe('application with CONFIRM flow', () => {
 
   it('update application with completed data', async () => {
     const updatedApp = await application.update({
-      basicData: CONFIRM_APP_DATA.basicData,
-      packageOptions: CONFIRM_APP_DATA.packageOptions,
-      additionalData: CONFIRM_APP_DATA.additionalData
+      basic_data: CONFIRM_APP_DATA.basic_data,
+      package_options: CONFIRM_APP_DATA.package_options,
+      additional_data: CONFIRM_APP_DATA.additional_data
     })
     expect(updatedApp).toBeDefined()
     expect(updatedApp.id).toBeDefined()
@@ -159,7 +159,7 @@ describe('application with CONFIRM flow', () => {
     async () => {
       const adminClient = new AcrosureClient({
         token: TEST_SECRET_KEY,
-        applicationId: application.id
+        application_id: application.id
       })
       const userApplication = adminClient.application
       const confirmedApp = await userApplication.confirm()

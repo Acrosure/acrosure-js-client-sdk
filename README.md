@@ -77,10 +77,10 @@ Create an application.
 ```javascript
 const createdApplication = await acrosureClient.application.create({
   productId: '<product_id>', // required
-  basicData: {},
-  packageOptions: {},
-  additionalData: {},
-  packageCode: '<package_code>',
+  basic_data: {},
+  package_options: {},
+  additional_data: {},
+  package_code: '<package_code>',
   attachments: []
 })
 ```
@@ -92,10 +92,10 @@ Update an application.
 ```javascript
 // acrosureClient.application.id needed to be set
 const updatedApplication = await acrosureClient.application.update({
-  basicData: {},
-  packageOptions: {},
-  additionalData: {},
-  packageCode: '<package_code>',
+  basic_data: {},
+  package_options: {},
+  additional_data: {},
+  package_code: '<package_code>',
   attachments: []
 })
 ```
@@ -116,7 +116,7 @@ Select package for current application.
 ```javascript
 // acrosureClient.application.id needed to be set
 const updatedApplication = await acrosureClient.application.selectPackage({
-  packageCode: '<package_code>'
+  package_code: '<package_code>'
 })
 ```
 
@@ -258,7 +258,7 @@ const values = await acrosureClient.data.get({
 })
 ```
 
-## Advance Usage
+## Advanced Usage
 
 Please refer to [this document](https://acrosure.github.io/acrosure-js-sdk/AcrosureClient.html) for AcrosureClient usage.
 
