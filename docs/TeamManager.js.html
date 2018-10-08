@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: DataManager.js</title>
+    <title>JSDoc: Source: TeamManager.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: DataManager.js</h1>
+    <h1 class="page-title">Source: TeamManager.js</h1>
 
     
 
@@ -27,12 +27,12 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @classdesc Represents an DataManager. (You most likely shouldn't be accessing this directly, use {@link AcrosureClient#data} instead.)
+ * @classdesc Represents an TeamManager. (You most likely shouldn't be accessing this directly, use {@link AcrosureClient#team} instead.)
  * @class
  */
-class DataManager {
+class TeamManager {
   /**
-   * @description Create an data manager.
+   * @description Create a team manager.
    * @constructor
    * @param {Object} args - An object consists of several properties.
    *   @param {function} args.callAPI - A function which call Acrosure API.
@@ -47,18 +47,12 @@ class DataManager {
 
   /**
    * @function
-   * @description Get data of a handler.
-   * @param {Object} args - An object consists of several properties.
-   *   @param {string} args.handler - A handler string.
-   *   @param {Array} args.dependencies - An array of dependencies (if needed).
-   * @returns {Object} Available values for the combination of handler/dependencies.
+   * @description Get current team info.
+   * @returns {Object} Current team info.
    */
-  async get({ handler, dependencies }) {
+  async getInfo() {
     try {
-      const resp = await this.callAPI('/data/get', {
-        handler,
-        dependencies
-      })
+      const resp = await this.callAPI('/teams/get-info')
       return resp
     } catch (err) {
       throw err
@@ -66,7 +60,7 @@ class DataManager {
   }
 }
 
-export default DataManager
+export default TeamManager
 </code></pre>
         </article>
     </section>

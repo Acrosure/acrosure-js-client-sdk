@@ -39,46 +39,24 @@ const acrosureClient = new AcrosureClient({
 
 AcrosureClient provides several objects such as `application`, `product`, etc. and associated APIs.
 
-Any data will be inside an response object with `data` key, such as:
+Any data will be inside an response object with `data` key, along with meta data, such as:
 
 ```json
 {
+  "data": { ... },
   "status": "ok",
-  "data": { ... }
+  ...
 }
 ```
 
 ### Application
 
-#### Set id
-
-Set application id for later uses.
-
-```javascript
-acrosureClient.application.setId('<application_id>')
-
-// ...
-
-const applicationId = acrosureClient.application.id
-```
-
 #### Get
 
-Get application with specified id, and set current application id for later uses.
+Get application with specified id.
 
 ```javascript
 const application = acrosureClient.application.get('<application_id>')
-
-// ...
-
-const applicationId = acrosureClient.application.id
-```
-
-Get current application.
-
-```javascript
-// acrosureClient.application.id needed to be set
-const application = await acrosureClient.application.get()
 ```
 
 #### Create
@@ -101,8 +79,8 @@ const createdApplication = await acrosureClient.application.create({
 Update an application.
 
 ```javascript
-// acrosureClient.application.id needed to be set
 const updatedApplication = await acrosureClient.application.update({
+  application_id: '<application_id>', // required
   basic_data: {},
   package_options: {},
   additional_data: {},
@@ -116,8 +94,9 @@ const updatedApplication = await acrosureClient.application.update({
 Get current application available packages.
 
 ```javascript
-// acrosureClient.application.id needed to be set
-const packages = await acrosureClient.application.getPackages()
+const packages = await acrosureClient.application.getPackages(
+  '<application_id>'
+)
 ```
 
 #### Select package
@@ -125,8 +104,8 @@ const packages = await acrosureClient.application.getPackages()
 Select package for current application.
 
 ```javascript
-// acrosureClient.application.id needed to be set
 const updatedApplication = await acrosureClient.application.selectPackage({
+  application_id: '<application_id>',
   package_code: '<package_code>'
 })
 ```
@@ -136,8 +115,9 @@ const updatedApplication = await acrosureClient.application.selectPackage({
 Get selected package of current application.
 
 ```javascript
-// acrosureClient.application.id needed to be set
-const currentPackage = await acrosureClient.application.getPackage()
+const currentPackage = await acrosureClient.application.getPackage(
+  '<application_id>'
+)
 ```
 
 #### Redirect to payment page
@@ -145,8 +125,8 @@ const currentPackage = await acrosureClient.application.getPackage()
 Redirect user to 2C2P payment page (Browser only).
 
 ```javascript
-// acrosureClient.application.id needed to be set
 await acrosureClient.application.redirectToPayment({
+  application_id: '<application_id>',
   frontend_url: '<redirect_url>'
 })
 ```
@@ -156,8 +136,9 @@ await acrosureClient.application.redirectToPayment({
 Submit current application.
 
 ```javascript
-// acrosureClient.application.id needed to be set
-const submittedApplication = await acrosureClient.application.submit()
+const submittedApplication = await acrosureClient.application.submit(
+  '<application_id>'
+)
 ```
 
 #### Confirm
@@ -167,8 +148,9 @@ Confirm current application.
 _This function needs secret API key._
 
 ```javascript
-// acrosureClient.application.id needed to be set
-const confirmedApplication = await acrosureClient.application.confirm()
+const confirmedApplication = await acrosureClient.application.confirm(
+  '<application_id>'
+)
 ```
 
 #### List
@@ -181,35 +163,12 @@ const applications = await acrosureClient.application.list(query)
 
 ### Product
 
-#### Set id
-
-Set product id for later uses.
-
-```javascript
-acrosureClient.product.setId('<product_id>')
-
-// ...
-
-const productId = acrosureClient.product.id
-```
-
 #### Get
 
-Get product with specified id, and set current product id for later uses.
+Get product with specified id.
 
 ```javascript
-const product = acrosureClient.product.get('<product_id>')
-
-// ...
-
-const productId = acrosureClient.product.id
-```
-
-Get current product.
-
-```javascript
-// acrosureClient.product.id needed to be set
-const product = await acrosureClient.product.get()
+const product = await acrosureClient.product.get('<product_id>')
 ```
 
 #### List
@@ -222,35 +181,12 @@ const products = await acrosureClient.product.list(query)
 
 ### Policy
 
-#### Set id
-
-Set policy id for later uses.
-
-```javascript
-acrosureClient.policy.setId('<policy_id>')
-
-// ...
-
-const policyId = acrosureClient.policy.id
-```
-
 #### Get
 
-Get policy with specified id, and set current policy id for later uses.
+Get policy with specified id.
 
 ```javascript
-const policy = acrosureClient.policy.get('<policy_id>')
-
-// ...
-
-const policyId = acrosureClient.policy.id
-```
-
-Get current policy.
-
-```javascript
-// acrosureClient.policy.id needed to be set
-const policy = await acrosureClient.policy.get()
+const policy = await acrosureClient.policy.get('<policy_id>')
 ```
 
 #### List
@@ -297,7 +233,6 @@ const teamInfo = await acrosureClient.team.getInfo()
 Verify webhook signature by specify signature and raw data string. (Only Node.js environment)
 
 ```javascript
-// acrosureClient.token must be specified
 const isSignatureValid = acrosureClient.verifyWebhook(
   '<signature>',
   '<raw_data>'
@@ -345,4 +280,10 @@ And refer to [Acrosure API Document](https://docs.acrosure.com/docs/api-overall.
 
 ```
 /data/get
+```
+
+### Team
+
+```
+/teams/get-info
 ```

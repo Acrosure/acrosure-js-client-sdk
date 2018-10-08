@@ -5,19 +5,21 @@ import { TEST_PUBLIC_TOKEN } from './const'
 
 const TEST_PRODUCT_ID = process.env.TEST_PRODUCT_ID
 
-describe('product endpoints', () => {
-  let product
+const getProductManager = () => {
+  const client = new AcrosureClient({
+    token: TEST_PUBLIC_TOKEN
+  })
+  return client.product
+}
 
+describe('product endpoints', () => {
   it('create an instance of AcrosureClient', () => {
-    const client = new AcrosureClient({
-      token: TEST_PUBLIC_TOKEN
-    })
-    product = client.product
-    expect(client).toBeInstanceOf(AcrosureClient)
+    const product = getProductManager()
     expect(product).toBeInstanceOf(ProductManager)
   })
 
   it('get product detail', async () => {
+    const product = getProductManager()
     const productDetail = await product.get(TEST_PRODUCT_ID)
     expect(productDetail.status).toBe('ok')
     expect(productDetail.data).toBeInstanceOf(Object)
@@ -25,6 +27,7 @@ describe('product endpoints', () => {
   })
 
   it('list products', async () => {
+    const product = getProductManager()
     const products = await product.list()
     expect(products.status).toBe('ok')
     expect(products.data).toBeInstanceOf(Array)

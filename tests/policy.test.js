@@ -5,19 +5,21 @@ import { TEST_PUBLIC_TOKEN } from './const'
 
 const TEST_POLICY_ID = process.env.TEST_POLICY_ID
 
-describe('policy endpoints', () => {
-  let policy
+const getPolicyManager = () => {
+  const client = new AcrosureClient({
+    token: TEST_PUBLIC_TOKEN
+  })
+  return client.policy
+}
 
+describe('policy endpoints', () => {
   it('create an instance of AcrosureClient', () => {
-    const client = new AcrosureClient({
-      token: TEST_PUBLIC_TOKEN
-    })
-    policy = client.policy
-    expect(client).toBeInstanceOf(AcrosureClient)
+    const policy = getPolicyManager()
     expect(policy).toBeInstanceOf(PolicyManager)
   })
 
   it('get policy detail', async () => {
+    const policy = getPolicyManager()
     const policyDetail = await policy.get(TEST_POLICY_ID)
     expect(policyDetail.status).toBe('ok')
     expect(policyDetail.data).toBeInstanceOf(Object)
@@ -25,6 +27,7 @@ describe('policy endpoints', () => {
   })
 
   it('list policies', async () => {
+    const policy = getPolicyManager()
     const policies = await policy.list()
     expect(policies.status).toBe('ok')
     expect(policies.data).toBeInstanceOf(Array)

@@ -3,19 +3,21 @@ import DataManager from '../src/DataManager'
 
 import { TEST_PUBLIC_TOKEN } from './const'
 
-describe('data endpoints', () => {
-  let data
+const getDataManager = () => {
+  const client = new AcrosureClient({
+    token: TEST_PUBLIC_TOKEN
+  })
+  return client.data
+}
 
+describe('data endpoints', () => {
   it('create an instance of AcrosureClient', () => {
-    const client = new AcrosureClient({
-      token: TEST_PUBLIC_TOKEN
-    })
-    data = client.data
-    expect(client).toBeInstanceOf(AcrosureClient)
+    const data = getDataManager()
     expect(data).toBeInstanceOf(DataManager)
   })
 
   it('get data values with no dependencies', async () => {
+    const data = getDataManager()
     const values = await data.get({
       handler: 'province'
     })
@@ -24,6 +26,7 @@ describe('data endpoints', () => {
   })
 
   it('get data values with one dependencies', async () => {
+    const data = getDataManager()
     const values = await data.get({
       handler: 'district',
       dependencies: ['กรุงเทพมหานคร']
@@ -33,6 +36,7 @@ describe('data endpoints', () => {
   })
 
   it('get data values with two dependencies', async () => {
+    const data = getDataManager()
     const values = await data.get({
       handler: 'subdistrict',
       dependencies: ['กรุงเทพมหานคร', 'ห้วยขวาง']

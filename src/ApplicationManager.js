@@ -8,49 +8,26 @@ class ApplicationManager {
    * @constructor
    * @param {Object} args - An object consists of several properties.
    *   @param {function} args.callAPI - A function which call Acrosure API.
-   *   @param {string=} args.id - Current managing application id.
    */
   constructor(args) {
-    /**
-     * @member {string}
-     * @description Application id that is currently in managing.
-     */
-    this.id = args.id
     /**
      * @member {function}
      * @description callAPI Function (which should be granted by {@link AcrosureClient#callAPI} )
      */
     this.callAPI = args.callAPI
-    /**
-     * @member {string}
-     * @protected
-     * @description Current application status
-     */
-    this.status = null
-  }
-
-  /**
-   * @function
-   * @description Set current application id.
-   * @param {Object} id - An application id.
-   */
-  setId(id) {
-    this.id = id
   }
 
   /**
    * @function
    * @description Get an application with specify id or with current id.
-   * @param {string=} id - An application id.
+   * @param {string} id - An application id.
    * @returns {Object} An application
    */
   async get(id) {
     try {
-      if (id) this.id = id
       const resp = await this.callAPI('/applications/get', {
-        application_id: this.id
+        application_id: id
       })
-      if (resp.data && resp.data.status) this.status = resp.data.status
       return resp
     } catch (err) {
       throw err
@@ -116,9 +93,6 @@ class ApplicationManager {
         group_policy_id,
         step
       })
-      if (!resp) throw new Error('no response')
-      if (resp.data && resp.data.id) this.id = resp.data.id
-      if (resp.data && resp.data.status) this.status = resp.data.status
       return resp
     } catch (err) {
       throw err
@@ -129,7 +103,7 @@ class ApplicationManager {
    * @function
    * @description Update current application or with specified id.
    * @param {Object} args - An object consists of several properties.
-   *   @param {string=} args.application_id - An application id.
+   *   @param {string} args.application_id - An application id.
    *   @param {Object=} args.basic_data - Application's basic_data.
    *   @param {Object=} args.package_options - Application's package_options.
    *   @param {Object=} args.additional_data - Application's additional_data.
@@ -156,11 +130,8 @@ class ApplicationManager {
     step
   }) {
     try {
-      if (application_id) {
-        this.id = application_id
-      }
       const resp = await this.callAPI('/applications/update', {
-        application_id: this.id,
+        application_id,
         basic_data,
         package_options,
         additional_data,
@@ -172,7 +143,6 @@ class ApplicationManager {
         group_policy_id,
         step
       })
-      if (resp.data && resp.data.status) this.status = resp.data.status
       return resp
     } catch (err) {
       throw err
@@ -182,12 +152,13 @@ class ApplicationManager {
   /**
    * @function
    * @description Get available packages for current application.
+   * @param {string} id - An application id.
    * @returns {Array} Available packages
    */
-  async getPackages() {
+  async getPackages(id) {
     try {
       const resp = await this.callAPI('/applications/get-packages', {
-        application_id: this.id
+        application_id: id
       })
       return resp
     } catch (err) {
@@ -198,12 +169,13 @@ class ApplicationManager {
   /**
    * @function
    * @description Get current application's package.
+   * @param {string} id - An application id.
    * @returns {Array} Current application's package
    */
-  async getPackage() {
+  async getPackage(id) {
     try {
       const resp = await this.callAPI('/applications/get-package', {
-        application_id: this.id
+        application_id: id
       })
       return resp
     } catch (err) {
@@ -215,13 +187,14 @@ class ApplicationManager {
    * @function
    * @description Select package for current application.
    * @param {Object} args - An object consists of several properties.
+   *   @param {string} args.application_id - An application id.
    *   @param {string} args.package_code - A string of package_code.
    * @returns {Object} Updated application
    */
-  async selectPackage({ package_code }) {
+  async selectPackage({ application_id, package_code }) {
     try {
       const resp = await this.callAPI('/applications/select-package', {
-        application_id: this.id,
+        application_id: application_id,
         package_code: package_code
       })
       return resp
@@ -233,14 +206,14 @@ class ApplicationManager {
   /**
    * @function
    * @description Submit current application.
+   * @param {string} id - An application id.
    * @returns {Object} Submitted application
    */
-  async submit() {
+  async submit(id) {
     try {
       const resp = await this.callAPI('/applications/submit', {
-        application_id: this.id
+        application_id: id
       })
-      if (resp.data && resp.data.status) this.status = resp.data.status
       return resp
     } catch (err) {
       throw err
@@ -250,14 +223,14 @@ class ApplicationManager {
   /**
    * @function
    * @description Confirm current application.
+   * @param {string} id - An application id.
    * @returns {Object} Confirmed application
    */
-  async confirm() {
+  async confirm(id) {
     try {
       const resp = await this.callAPI('/applications/confirm', {
-        application_id: this.id
+        application_id: id
       })
-      if (resp.data && resp.data.status) this.status = resp.data.status
       return resp
     } catch (err) {
       throw err
@@ -268,11 +241,12 @@ class ApplicationManager {
    * @function
    * @description Redirect to current application's payment page (Browser only).
    * @param {Object} args - An object consists of several properties.
+   *   @param {string} args.application_id - An application id.
    *   @param {string} args.frontend_url - A string of redirect frontend URL.
    */
-  async redirectToPayment({ frontend_url }) {
+  async redirectToPayment(args) {
     try {
-      const form = await this.get2C2PForm({ frontend_url })
+      const form = await this.get2C2PForm(args)
       form.submit()
     } catch (err) {
       throw err
@@ -284,12 +258,13 @@ class ApplicationManager {
    * @protected
    * @description Get form element for 2c2p payment (This is being called by {@link ApplicationManager#redirectToPayment}, but it is exposed just in case you need to access the generated form directly).
    * @param {Object} args - An object consists of several properties.
+   *   @param {string} args.application_id - An application id.
    *   @param {string} args.frontend_url - A string of redirect frontend URL.
    * @returns {Object} An form element
    */
-  async get2C2PForm({ frontend_url }) {
+  async get2C2PForm(args) {
     try {
-      const resp = await this.get2C2PHash({ frontend_url })
+      const resp = await this.get2C2PHash(args)
       if (resp.status === 'error') throw new Error('get hash error')
       if (!document) throw new Error('no document defined')
       const form = document.createElement('form')
@@ -311,10 +286,10 @@ class ApplicationManager {
     }
   }
 
-  async get2C2PHash({ frontend_url }) {
+  async get2C2PHash({ application_id, frontend_url }) {
     try {
       const resp = await this.callAPI('/payments/2c2p/get-hash', {
-        application_id: this.id,
+        application_id,
         frontend_url
       })
       return resp

@@ -8,19 +8,23 @@ import {
   CONFIRM_APP_DATA
 } from './const'
 
+const getApplicationManager = () => {
+  const client = new AcrosureClient({
+    token: TEST_PUBLIC_TOKEN
+  })
+  return client.application
+}
+
 describe('application with SUBMIT flow', () => {
-  let application
+  let applicationId
 
   it('create an instance of AcrosureClient', () => {
-    const client = new AcrosureClient({
-      token: TEST_PUBLIC_TOKEN
-    })
-    application = client.application
-    expect(client).toBeInstanceOf(AcrosureClient)
+    const application = getApplicationManager()
     expect(application).toBeInstanceOf(ApplicationManager)
   })
 
   it('create application with empty data', async () => {
+    const application = getApplicationManager()
     const resp = await application.create({
       product_id: SUBMIT_APP_DATA.product_id
     })
@@ -28,19 +32,23 @@ describe('application with SUBMIT flow', () => {
     const createdApp = resp.data
     expect(createdApp).toBeDefined()
     expect(createdApp.id).toBeDefined()
+    applicationId = createdApp.id
     expect(createdApp.status).toBe('INITIAL')
   })
 
   it('get application', async () => {
-    const resp = await application.get()
+    const application = getApplicationManager()
+    const resp = await application.get(applicationId)
     expect(resp.status).toBe('ok')
     const app = resp.data
     expect(app).toBeDefined()
-    expect(app.id).toBe(application.id)
+    expect(app.id).toBe(applicationId)
   })
 
   it('update application with basic data', async () => {
+    const application = getApplicationManager()
     const resp = await application.update({
+      application_id: applicationId,
       basic_data: SUBMIT_APP_DATA.basic_data
     })
     expect(resp.status).toBe('ok')
@@ -53,7 +61,8 @@ describe('application with SUBMIT flow', () => {
   let packages = []
 
   it('get packages', async () => {
-    const resp = await application.getPackages()
+    const application = getApplicationManager()
+    const resp = await application.getPackages(applicationId)
     expect(resp.status).toBe('ok')
     packages = resp.data
     expect(packages).toBeInstanceOf(Array)
@@ -61,8 +70,10 @@ describe('application with SUBMIT flow', () => {
   })
 
   it('select package', async () => {
+    const application = getApplicationManager()
     const firstPackage = packages[0]
     const resp = await application.selectPackage({
+      application_id: applicationId,
       package_code: firstPackage.package_code
     })
     expect(resp.status).toBe('ok')
@@ -71,7 +82,8 @@ describe('application with SUBMIT flow', () => {
   })
 
   it('get current package', async () => {
-    const resp = await application.getPackage()
+    const application = getApplicationManager()
+    const resp = await application.getPackage(applicationId)
     expect(resp.status).toBe('ok')
     const currentPackage = resp.data
     expect(currentPackage).toBeInstanceOf(Object)
@@ -80,7 +92,9 @@ describe('application with SUBMIT flow', () => {
   it(
     'update application with completed data',
     async () => {
+      const application = getApplicationManager()
       const resp = await application.update({
+        application_id: applicationId,
         basic_data: SUBMIT_APP_DATA.basic_data,
         package_options: SUBMIT_APP_DATA.package_options,
         additional_data: SUBMIT_APP_DATA.additional_data
@@ -95,14 +109,19 @@ describe('application with SUBMIT flow', () => {
   )
 
   it('get 2c2p hash form', async () => {
+    const application = getApplicationManager()
     const hashForm = await application.get2C2PForm({
+      application_id: applicationId,
       frontend_url: 'https://acrosure.com'
     })
     expect(hashForm).toBeInstanceOf(HTMLFormElement)
   })
 
   it('submit application', async () => {
-    const resp = await application.submit()
+    const client = new AcrosureClient({
+      token: TEST_SECRET_TOKEN
+    })
+    const resp = await client.application.submit(applicationId)
     expect(resp.status).toBe('ok')
     const submittedApp = resp.data
     expect(submittedApp).toBeDefined()
@@ -112,18 +131,15 @@ describe('application with SUBMIT flow', () => {
 })
 
 describe('application with CONFIRM flow', () => {
-  let application
+  let applicationId
 
   it('create an instance of AcrosureClient', () => {
-    const client = new AcrosureClient({
-      token: TEST_PUBLIC_TOKEN
-    })
-    application = client.application
-    expect(client).toBeInstanceOf(AcrosureClient)
+    const application = getApplicationManager()
     expect(application).toBeInstanceOf(ApplicationManager)
   })
 
   it('create application with empty data', async () => {
+    const application = getApplicationManager()
     const resp = await application.create({
       product_id: CONFIRM_APP_DATA.product_id
     })
@@ -131,19 +147,23 @@ describe('application with CONFIRM flow', () => {
     const createdApp = resp.data
     expect(createdApp).toBeDefined()
     expect(createdApp.id).toBeDefined()
+    applicationId = createdApp.id
     expect(createdApp.status).toBe('INITIAL')
   })
 
   it('get application', async () => {
-    const resp = await application.get()
+    const application = getApplicationManager()
+    const resp = await application.get(applicationId)
     expect(resp.status).toBe('ok')
     const app = resp.data
     expect(app).toBeDefined()
-    expect(app.id).toBe(application.id)
+    expect(app.id).toBe(applicationId)
   })
 
   it('update application with basic data', async () => {
+    const application = getApplicationManager()
     const resp = await application.update({
+      application_id: applicationId,
       basic_data: CONFIRM_APP_DATA.basic_data
     })
     expect(resp.status).toBe('ok')
@@ -156,7 +176,8 @@ describe('application with CONFIRM flow', () => {
   let packages = []
 
   it('get packages', async () => {
-    const resp = await application.getPackages()
+    const application = getApplicationManager()
+    const resp = await application.getPackages(applicationId)
     expect(resp.status).toBe('ok')
     packages = resp.data
     expect(packages).toBeInstanceOf(Array)
@@ -164,8 +185,10 @@ describe('application with CONFIRM flow', () => {
   })
 
   it('select package', async () => {
+    const application = getApplicationManager()
     const firstPackage = packages[0]
     const resp = await application.selectPackage({
+      application_id: applicationId,
       package_code: firstPackage.package_code
     })
     expect(resp.status).toBe('ok')
@@ -174,7 +197,8 @@ describe('application with CONFIRM flow', () => {
   })
 
   it('get current package', async () => {
-    const resp = await application.getPackage()
+    const application = getApplicationManager()
+    const resp = await application.getPackage(applicationId)
     expect(resp.status).toBe('ok')
     const currentPackage = resp.data
     expect(currentPackage).toBeInstanceOf(Object)
@@ -183,7 +207,9 @@ describe('application with CONFIRM flow', () => {
   it(
     'update application with completed data',
     async () => {
+      const application = getApplicationManager()
       const resp = await application.update({
+        application_id: applicationId,
         basic_data: CONFIRM_APP_DATA.basic_data,
         package_options: CONFIRM_APP_DATA.package_options,
         additional_data: CONFIRM_APP_DATA.additional_data
@@ -200,12 +226,10 @@ describe('application with CONFIRM flow', () => {
   it(
     'confirm application',
     async () => {
-      const adminClient = new AcrosureClient({
-        token: TEST_SECRET_TOKEN,
-        application_id: application.id
+      const client = new AcrosureClient({
+        token: TEST_SECRET_TOKEN
       })
-      const userApplication = adminClient.application
-      const resp = await userApplication.confirm()
+      const resp = await client.application.confirm(applicationId)
       expect(resp.status).toBe('error')
       const confirmedApp = resp.data
       expect(confirmedApp).toBeDefined()

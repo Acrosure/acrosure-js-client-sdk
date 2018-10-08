@@ -8,7 +8,6 @@ class PolicyManager {
    * @constructor
    * @param {Object} args - An object consists of several properties.
    *   @param {function} args.callAPI - A function which call Acrosure API.
-   *   @param {string=} args.id - A policy id.
    */
   constructor(args) {
     /**
@@ -16,20 +15,6 @@ class PolicyManager {
      * @description callAPI Function (which should be granted by {@link AcrosureClient#callAPI} )
      */
     this.callAPI = args.callAPI
-    /**
-     * @member {string}
-     * @description Current policy id.
-     */
-    this.id = args.id
-  }
-
-  /**
-   * @function
-   * @description Set current policy id.
-   * @param {Object} id - A policy id.
-   */
-  setId(id) {
-    this.id = id
   }
 
   /**
@@ -40,9 +25,8 @@ class PolicyManager {
    */
   async get(id) {
     try {
-      if (id) this.id = id
       const resp = await this.callAPI('/policies/get', {
-        policy_id: this.id
+        policy_id: id
       })
       return resp
     } catch (err) {
