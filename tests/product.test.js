@@ -1,16 +1,16 @@
 import AcrosureClient from '../src'
 import ProductManager from '../src/ProductManager'
 
-import { TEST_PUBLIC_KEY } from './const'
+import { TEST_PUBLIC_TOKEN } from './const'
 
-const TEST_PRODUCT_ID = 'prod_contractor'
+const TEST_PRODUCT_ID = process.env.TEST_PRODUCT_ID
 
 describe('product endpoints', () => {
   let product
 
   it('create an instance of AcrosureClient', () => {
     const client = new AcrosureClient({
-      token: TEST_PUBLIC_KEY
+      token: TEST_PUBLIC_TOKEN
     })
     product = client.product
     expect(client).toBeInstanceOf(AcrosureClient)

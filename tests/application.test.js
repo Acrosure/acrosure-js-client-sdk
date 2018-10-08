@@ -2,8 +2,8 @@ import AcrosureClient from '../src'
 import ApplicationManager from '../src/ApplicationManager'
 
 import {
-  TEST_PUBLIC_KEY,
-  TEST_SECRET_KEY,
+  TEST_PUBLIC_TOKEN,
+  TEST_SECRET_TOKEN,
   SUBMIT_APP_DATA,
   CONFIRM_APP_DATA
 } from './const'
@@ -13,7 +13,7 @@ describe('application with SUBMIT flow', () => {
 
   it('create an instance of AcrosureClient', () => {
     const client = new AcrosureClient({
-      token: TEST_PUBLIC_KEY
+      token: TEST_PUBLIC_TOKEN
     })
     application = client.application
     expect(client).toBeInstanceOf(AcrosureClient)
@@ -100,7 +100,7 @@ describe('application with CONFIRM flow', () => {
 
   it('create an instance of AcrosureClient', () => {
     const client = new AcrosureClient({
-      token: TEST_PUBLIC_KEY
+      token: TEST_PUBLIC_TOKEN
     })
     application = client.application
     expect(client).toBeInstanceOf(AcrosureClient)
@@ -165,7 +165,7 @@ describe('application with CONFIRM flow', () => {
     'confirm application',
     async () => {
       const adminClient = new AcrosureClient({
-        token: TEST_SECRET_KEY,
+        token: TEST_SECRET_TOKEN,
         application_id: application.id
       })
       const userApplication = adminClient.application
@@ -180,7 +180,7 @@ describe('application with CONFIRM flow', () => {
 
 describe('application remaining endpoints', () => {
   it('list applications', async () => {
-    const client = new AcrosureClient({ token: TEST_PUBLIC_KEY })
+    const client = new AcrosureClient({ token: TEST_PUBLIC_TOKEN })
     const applications = await client.application.list()
     expect(applications).toBeInstanceOf(Array)
   })

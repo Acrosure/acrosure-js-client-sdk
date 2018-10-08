@@ -1,7 +1,6 @@
 import 'whatwg-fetch'
 
-// const API_URL = 'https://api.phantompage.com'
-const API_URL = 'http://localhost:8000'
+const API_URL = 'https://api.acrosure.com'
 
 const api = async (path, body, token) => {
   try {
@@ -26,6 +25,9 @@ const api = async (path, body, token) => {
     return data.data
   } catch (err) {
     console.warn(err)
+    if (err.message) {
+      throw err
+    }
     if (err && err.response) {
       if (err.response.data) {
         throw err.response.data

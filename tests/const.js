@@ -1,5 +1,9 @@
-export const TEST_PUBLIC_KEY = 'tokn_sample_public'
-export const TEST_SECRET_KEY = 'tokn_sample_secret'
+import dotenv from 'dotenv'
+
+dotenv.config()
+
+export const TEST_PUBLIC_TOKEN = process.env.TEST_PUBLIC_TOKEN
+export const TEST_SECRET_TOKEN = process.env.TEST_SECRET_TOKEN
 
 export const SUBMIT_APP_DATA = {
   product_id: 'prod_contractor',
