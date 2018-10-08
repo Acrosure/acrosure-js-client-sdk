@@ -230,7 +230,6 @@ describe('application with CONFIRM flow', () => {
         token: TEST_SECRET_TOKEN
       })
       const resp = await client.application.confirm(applicationId)
-      expect(resp.status).toBe('error')
       const confirmedApp = resp.data
       expect(confirmedApp).toBeDefined()
       expect(confirmedApp.id).toBeDefined()
