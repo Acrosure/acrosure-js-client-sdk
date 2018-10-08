@@ -27,7 +27,7 @@ const AcrosureClient = require('@acrosure/js-sdk')
 
 Instantiate with an API key from [Acrosure Dashboard](https://dashboard.acrosure.com).
 
-_If you're using this on client-side, it is highly recommended to use the public key instead of private key because of security concerns._
+_If you're using this on client-side, DO NOT use your secret token._
 
 ```javascript
 const acrosureClient = new AcrosureClient({
