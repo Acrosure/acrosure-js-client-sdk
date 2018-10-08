@@ -1,7 +1,6 @@
 import 'whatwg-fetch'
-require('dotenv').config()
 
-const API_URL = process.env.TEST_API_URL || 'https://api.acrosure.com'
+const API_URL = 'https://api.acrosure.com'
 
 const api = async (path, body, token) => {
   try {
