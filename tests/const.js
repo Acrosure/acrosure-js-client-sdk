@@ -1,6 +1,4 @@
-import dotenv from 'dotenv'
-
-dotenv.config()
+require('dotenv').config()
 
 export const TEST_PUBLIC_TOKEN = process.env.TEST_PUBLIC_TOKEN
 export const TEST_SECRET_TOKEN = process.env.TEST_SECRET_TOKEN
@@ -78,11 +76,11 @@ export const SUBMIT_APP_DATA = {
       district: 'จตุจักร',
       province: 'กรุงเทพมหานคร'
     },
-    project_effective_date: '2018-10-01T00:00:00+07:00',
-    project_expiry_date: '2019-10-01T00:00:00+07:00',
+    project_effective_date: '2018-10-01',
+    project_expiry_date: '2019-10-01',
     project_duration: 365,
     warranty_duration: 5,
-    warranty_expiry_date: '2018-10-06T00:00:00Z',
+    warranty_expiry_date: '2018-10-06',
     payment_type: 'ONLINE',
     policy_code: '',
     files: null

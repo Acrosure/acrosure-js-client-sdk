@@ -19,7 +19,8 @@ describe('data endpoints', () => {
     const values = await data.get({
       handler: 'province'
     })
-    expect(values).toBeInstanceOf(Array)
+    expect(values.status).toBe('ok')
+    expect(values.data).toBeInstanceOf(Array)
   })
 
   it('get data values with one dependencies', async () => {
@@ -27,7 +28,8 @@ describe('data endpoints', () => {
       handler: 'district',
       dependencies: ['กรุงเทพมหานคร']
     })
-    expect(values).toBeInstanceOf(Array)
+    expect(values.status).toBe('ok')
+    expect(values.data).toBeInstanceOf(Array)
   })
 
   it('get data values with two dependencies', async () => {
@@ -35,6 +37,7 @@ describe('data endpoints', () => {
       handler: 'subdistrict',
       dependencies: ['กรุงเทพมหานคร', 'ห้วยขวาง']
     })
-    expect(values).toBeInstanceOf(Array)
+    expect(values.status).toBe('ok')
+    expect(values.data).toBeInstanceOf(Array)
   })
 })

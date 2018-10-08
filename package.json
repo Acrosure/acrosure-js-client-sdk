@@ -11,7 +11,7 @@
     "doc": "jsdoc src -d docs",
     "doc:watch": "nodemon --watch src --exec 'yarn run doc'",
     "test": "jest",
-    "test:watch": "nodemon --watch src --watch tests --exec 'yarn run test'"
+    "test:watch": "yarn test --watchAll"
   },
   "devDependencies": {
     "babel": "^6.23.0",

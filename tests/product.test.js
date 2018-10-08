@@ -19,12 +19,14 @@ describe('product endpoints', () => {
 
   it('get product detail', async () => {
     const productDetail = await product.get(TEST_PRODUCT_ID)
-    expect(productDetail).toBeInstanceOf(Object)
-    expect(productDetail.id).toBe(TEST_PRODUCT_ID)
+    expect(productDetail.status).toBe('ok')
+    expect(productDetail.data).toBeInstanceOf(Object)
+    expect(productDetail.data.id).toBe(TEST_PRODUCT_ID)
   })
 
   it('list products', async () => {
     const products = await product.list()
-    expect(products).toBeInstanceOf(Array)
+    expect(products.status).toBe('ok')
+    expect(products.data).toBeInstanceOf(Array)
   })
 })

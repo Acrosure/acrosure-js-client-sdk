@@ -50,7 +50,7 @@ class ApplicationManager {
       const resp = await this.callAPI('/applications/get', {
         application_id: this.id
       })
-      if (resp.status) this.status = resp.status
+      if (resp.data && resp.data.status) this.status = resp.data.status
       return resp
     } catch (err) {
       throw err
@@ -117,8 +117,8 @@ class ApplicationManager {
         step
       })
       if (!resp) throw new Error('no response')
-      if (resp.id) this.id = resp.id
-      if (resp.status) this.status = resp.status
+      if (resp.data && resp.data.id) this.id = resp.data.id
+      if (resp.data && resp.data.status) this.status = resp.data.status
       return resp
     } catch (err) {
       throw err
@@ -172,7 +172,7 @@ class ApplicationManager {
         group_policy_id,
         step
       })
-      if (resp.status) this.status = resp.status
+      if (resp.data && resp.data.status) this.status = resp.data.status
       return resp
     } catch (err) {
       throw err
@@ -240,7 +240,7 @@ class ApplicationManager {
       const resp = await this.callAPI('/applications/submit', {
         application_id: this.id
       })
-      if (resp.status) this.status = resp.status
+      if (resp.data && resp.data.status) this.status = resp.data.status
       return resp
     } catch (err) {
       throw err
@@ -257,7 +257,7 @@ class ApplicationManager {
       const resp = await this.callAPI('/applications/confirm', {
         application_id: this.id
       })
-      if (resp.status) this.status = resp.status
+      if (resp.data && resp.data.status) this.status = resp.data.status
       return resp
     } catch (err) {
       throw err
@@ -289,9 +289,11 @@ class ApplicationManager {
    */
   async get2C2PForm({ frontend_url }) {
     try {
-      const hashForm = await this.get2C2PHash({ frontend_url })
+      const resp = await this.get2C2PHash({ frontend_url })
+      if (resp.status === 'error') throw new Error('get hash error')
       if (!document) throw new Error('no document defined')
       const form = document.createElement('form')
+      const hashForm = resp.data
       form.method = 'POST'
       form.action = hashForm.payment_url
       Object.keys(hashForm).forEach(key => {

@@ -1,6 +1,7 @@
 import 'whatwg-fetch'
+require('dotenv').config()
 
-const API_URL = 'https://api.acrosure.com'
+const API_URL = process.env.TEST_API_URL || 'https://api.acrosure.com'
 
 const api = async (path, body, token) => {
   try {
@@ -19,10 +20,7 @@ const api = async (path, body, token) => {
       throw new Error('no response')
     }
     const data = await response.json()
-    if (data.status !== 'ok') {
-      throw data
-    }
-    return data.data
+    return data
   } catch (err) {
     console.warn(err)
     if (err.message) {

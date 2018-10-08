@@ -21,24 +21,30 @@ describe('application with SUBMIT flow', () => {
   })
 
   it('create application with empty data', async () => {
-    const createdApp = await application.create({
+    const resp = await application.create({
       product_id: SUBMIT_APP_DATA.product_id
     })
+    expect(resp.status).toBe('ok')
+    const createdApp = resp.data
     expect(createdApp).toBeDefined()
     expect(createdApp.id).toBeDefined()
     expect(createdApp.status).toBe('INITIAL')
   })
 
   it('get application', async () => {
-    const app = await application.get()
+    const resp = await application.get()
+    expect(resp.status).toBe('ok')
+    const app = resp.data
     expect(app).toBeDefined()
     expect(app.id).toBe(application.id)
   })
 
   it('update application with basic data', async () => {
-    const updatedApp = await application.update({
+    const resp = await application.update({
       basic_data: SUBMIT_APP_DATA.basic_data
     })
+    expect(resp.status).toBe('ok')
+    const updatedApp = resp.data
     expect(updatedApp).toBeDefined()
     expect(updatedApp.id).toBeDefined()
     expect(updatedApp.status).toBe('PACKAGE_REQUIRED')
@@ -47,32 +53,40 @@ describe('application with SUBMIT flow', () => {
   let packages = []
 
   it('get packages', async () => {
-    packages = await application.getPackages()
+    const resp = await application.getPackages()
+    expect(resp.status).toBe('ok')
+    packages = resp.data
     expect(packages).toBeInstanceOf(Array)
     expect(packages.length).toBeGreaterThan(0)
   })
 
   it('select package', async () => {
     const firstPackage = packages[0]
-    const updatedApp = await application.selectPackage({
+    const resp = await application.selectPackage({
       package_code: firstPackage.package_code
     })
+    expect(resp.status).toBe('ok')
+    const updatedApp = resp.data
     expect(updatedApp.status).toBe('DATA_REQUIRED')
   })
 
   it('get current package', async () => {
-    const currentPackage = await application.getPackage()
+    const resp = await application.getPackage()
+    expect(resp.status).toBe('ok')
+    const currentPackage = resp.data
     expect(currentPackage).toBeInstanceOf(Object)
   })
 
   it(
     'update application with completed data',
     async () => {
-      const updatedApp = await application.update({
+      const resp = await application.update({
         basic_data: SUBMIT_APP_DATA.basic_data,
         package_options: SUBMIT_APP_DATA.package_options,
         additional_data: SUBMIT_APP_DATA.additional_data
       })
+      expect(resp.status).toBe('ok')
+      const updatedApp = resp.data
       expect(updatedApp).toBeDefined()
       expect(updatedApp.id).toBeDefined()
       expect(updatedApp.status).toBe('READY')
@@ -88,7 +102,9 @@ describe('application with SUBMIT flow', () => {
   })
 
   it('submit application', async () => {
-    const submittedApp = await application.submit()
+    const resp = await application.submit()
+    expect(resp.status).toBe('ok')
+    const submittedApp = resp.data
     expect(submittedApp).toBeDefined()
     expect(submittedApp.id).toBeDefined()
     expect(submittedApp.status).toBe('SUBMITTED')
@@ -108,18 +124,30 @@ describe('application with CONFIRM flow', () => {
   })
 
   it('create application with empty data', async () => {
-    const createdApp = await application.create({
+    const resp = await application.create({
       product_id: CONFIRM_APP_DATA.product_id
     })
+    expect(resp.status).toBe('ok')
+    const createdApp = resp.data
     expect(createdApp).toBeDefined()
     expect(createdApp.id).toBeDefined()
     expect(createdApp.status).toBe('INITIAL')
   })
 
+  it('get application', async () => {
+    const resp = await application.get()
+    expect(resp.status).toBe('ok')
+    const app = resp.data
+    expect(app).toBeDefined()
+    expect(app.id).toBe(application.id)
+  })
+
   it('update application with basic data', async () => {
-    const updatedApp = await application.update({
+    const resp = await application.update({
       basic_data: CONFIRM_APP_DATA.basic_data
     })
+    expect(resp.status).toBe('ok')
+    const updatedApp = resp.data
     expect(updatedApp).toBeDefined()
     expect(updatedApp.id).toBeDefined()
     expect(updatedApp.status).toBe('PACKAGE_REQUIRED')
@@ -127,39 +155,47 @@ describe('application with CONFIRM flow', () => {
 
   let packages = []
 
-  it(
-    'get packages',
-    async () => {
-      packages = await application.getPackages()
-      expect(packages).toBeInstanceOf(Array)
-      expect(packages.length).toBeGreaterThan(0)
-    },
-    40000
-  )
+  it('get packages', async () => {
+    const resp = await application.getPackages()
+    expect(resp.status).toBe('ok')
+    packages = resp.data
+    expect(packages).toBeInstanceOf(Array)
+    expect(packages.length).toBeGreaterThan(0)
+  })
 
   it('select package', async () => {
     const firstPackage = packages[0]
-    const updatedApp = await application.selectPackage({
+    const resp = await application.selectPackage({
       package_code: firstPackage.package_code
     })
+    expect(resp.status).toBe('ok')
+    const updatedApp = resp.data
     expect(updatedApp.status).toBe('DATA_REQUIRED')
   })
 
   it('get current package', async () => {
-    const currentPackage = await application.getPackage()
+    const resp = await application.getPackage()
+    expect(resp.status).toBe('ok')
+    const currentPackage = resp.data
     expect(currentPackage).toBeInstanceOf(Object)
   })
 
-  it('update application with completed data', async () => {
-    const updatedApp = await application.update({
-      basic_data: CONFIRM_APP_DATA.basic_data,
-      package_options: CONFIRM_APP_DATA.package_options,
-      additional_data: CONFIRM_APP_DATA.additional_data
-    })
-    expect(updatedApp).toBeDefined()
-    expect(updatedApp.id).toBeDefined()
-    expect(updatedApp.status).toBe('READY')
-  })
+  it(
+    'update application with completed data',
+    async () => {
+      const resp = await application.update({
+        basic_data: CONFIRM_APP_DATA.basic_data,
+        package_options: CONFIRM_APP_DATA.package_options,
+        additional_data: CONFIRM_APP_DATA.additional_data
+      })
+      expect(resp.status).toBe('ok')
+      const updatedApp = resp.data
+      expect(updatedApp).toBeDefined()
+      expect(updatedApp.id).toBeDefined()
+      expect(updatedApp.status).toBe('READY')
+    },
+    10000
+  )
 
   it(
     'confirm application',
@@ -169,7 +205,9 @@ describe('application with CONFIRM flow', () => {
         application_id: application.id
       })
       const userApplication = adminClient.application
-      const confirmedApp = await userApplication.confirm()
+      const resp = await userApplication.confirm()
+      expect(resp.status).toBe('error')
+      const confirmedApp = resp.data
       expect(confirmedApp).toBeDefined()
       expect(confirmedApp.id).toBeDefined()
       expect(confirmedApp.status).toBe('CONFIRMING')
@@ -181,7 +219,9 @@ describe('application with CONFIRM flow', () => {
 describe('application remaining endpoints', () => {
   it('list applications', async () => {
     const client = new AcrosureClient({ token: TEST_PUBLIC_TOKEN })
-    const applications = await client.application.list()
+    const resp = await client.application.list()
+    expect(resp.status).toBe('ok')
+    const applications = resp.data
     expect(applications).toBeInstanceOf(Array)
   })
 })

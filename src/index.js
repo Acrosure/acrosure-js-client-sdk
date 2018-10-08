@@ -4,6 +4,7 @@ import ApplicationManager from './ApplicationManager'
 import ProductManager from './ProductManager'
 import PolicyManager from './PolicyManager'
 import DataManager from './DataManager'
+import TeamManager from './TeamManager'
 
 import api from './common/api'
 import { isNode } from './common/helpers'
@@ -56,6 +57,13 @@ class AcrosureClient {
      * @description DataManager (You should be using this instead of trying to access {@link DataManager} directly)
      */
     this.data = new DataManager({
+      callAPI
+    })
+    /**
+     * @member {TeamManager}
+     * @description TeamManager (You should be using this instead of trying to access {@link TeamManager} directly)
+     */
+    this.team = new TeamManager({
       callAPI
     })
   }
