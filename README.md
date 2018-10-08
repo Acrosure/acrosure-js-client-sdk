@@ -39,6 +39,15 @@ const acrosureClient = new AcrosureClient({
 
 AcrosureClient provides several objects such as `application`, `product`, etc. and associated APIs.
 
+Any data will be inside an response object with `data` key, such as:
+
+```json
+{
+  "status": "ok",
+  "data": { ... }
+}
+```
+
 ### Application
 
 #### Set id
@@ -269,6 +278,16 @@ const values = await acrosureClient.data.get({
   handler: '<some_handler>',
   dependencies: ['<dependency_1>', '<dependency_2>']
 })
+```
+
+### Team
+
+#### Get info
+
+Get current team information.
+
+```javascript
+const teamInfo = await acrosureClient.team.getInfo()
 ```
 
 ### Other functionality
