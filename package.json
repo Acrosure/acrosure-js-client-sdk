@@ -1,9 +1,8 @@
 {
   "name": "@acrosure/js-sdk",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Acrosure JavaScript SDK",
   "author": "Acrosure",
-  "license": "MIT",
   "main": "./dist/index.js",
   "scripts": {
     "build": "babel src --out-dir dist --source-maps && yarn run webpack",
