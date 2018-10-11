@@ -1,5 +1,3 @@
-import { sha256 } from 'js-sha256'
-
 import ApplicationManager from './ApplicationManager'
 import ProductManager from './ProductManager'
 import PolicyManager from './PolicyManager'
@@ -85,7 +83,10 @@ class AcrosureClient {
     if (!isNode()) {
       throw new Error('Only available on Node.js enviroment')
     }
-    const expected = sha256.hmac(this.token, data)
+    const crypto = require('crypto')
+    const hmac = crypto.createHmac('sha256', this.token)
+    hmac.update(data)
+    const expected = hmac.digest('hex')
     return signature === expected
   }
 }
