@@ -1,0 +1,16 @@
+{
+  "name": "@acrosure/js-sdk-example-node",
+  "version": "1.0.0",
+  "description": "A Node.js example for Acrosure JavaScript SDK.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@acrosure/js-sdk": "^1.0.2",
+    "express": "^4.16.4"
+  }
+}
