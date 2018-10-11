@@ -1,6 +1,6 @@
 {
   "name": "@acrosure/js-sdk",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Acrosure JavaScript SDK",
   "author": "Acrosure",
   "main": "./dist/index.js",
