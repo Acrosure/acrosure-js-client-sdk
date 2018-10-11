@@ -233,7 +233,7 @@ const teamInfo = await acrosureClient.team.getInfo()
 Verify webhook signature by specify signature and raw data string. (Only Node.js environment)
 
 ```javascript
-const isSignatureValid = acrosureClient.verifyWebhook(
+const isSignatureValid = acrosureClient.verifySignature(
   '<signature>',
   '<raw_data>'
 )
