@@ -1,6 +1,6 @@
 {
   "name": "@acrosure/js-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Acrosure JavaScript SDK",
   "author": "Acrosure",
   "main": "./dist/index.js",
@@ -36,7 +36,7 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
-    "whatwg-fetch": "^2.0.4"
+    "isomorphic-fetch": "^2.2.1"
   },
   "keywords": [
     "acrosure",
