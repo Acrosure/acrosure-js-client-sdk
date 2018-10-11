@@ -268,7 +268,7 @@ class ApplicationManager {
       if (resp.status === 'error') throw new Error('get hash error')
       if (!document) throw new Error('no document defined')
       const form = document.createElement('form')
-      const hashForm = resp.data
+      const hashForm = resp.data || {}
       form.method = 'POST'
       form.action = hashForm.payment_url
       Object.keys(hashForm).forEach(key => {
