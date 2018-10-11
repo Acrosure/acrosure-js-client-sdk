@@ -8,7 +8,7 @@ const acrosureClient = new AcrosureClient({
   token: 'tokn_sample_secret'
 })
 
-app.get('/', (req, res) => res.send('Hello Acrosure!'))
+app.get('/', (req, res) => res.send('<a href="/test-sdk">Test</a>'))
 
 app.get('/test-sdk', async (req, res) => {
   let applicationId = ''
@@ -23,6 +23,7 @@ app.get('/test-sdk', async (req, res) => {
   applicationId = resp.data.id
   resp = await acrosureClient.application.getPackages(applicationId)
   console.log('get-packages:', resp)
+  console.log('-------------------------------')
   const packageCode = resp.data[0].package_code
   resp = await acrosureClient.application.selectPackage({
     application_id: applicationId,
