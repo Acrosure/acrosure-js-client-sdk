@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@acrosure/js-sdk@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@acrosure/js-sdk/-/js-sdk-1.0.2.tgz#5582a0b932034bf67510861ed879ea60781de85f"
+"@acrosure/js-sdk@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@acrosure/js-sdk/-/js-sdk-1.0.3.tgz#70e8c936db39cf13bac77a7cad913981e95a77ed"
   dependencies:
     isomorphic-fetch "^2.2.1"
 
@@ -67,6 +67,10 @@ depd@~1.1.2:
 destroy@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.0.4.tgz#978857442c44749e4206613e37946205826abd80"
+
+dotenv@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.1.0.tgz#9853b6ca98292acb7dec67a95018fa40bccff42c"
 
 ee-first@1.1.1:
   version "1.1.1"

@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const AcrosureClient = require('@acrosure/js-sdk')
 const { APP_DATA } = require('./data')
@@ -5,10 +6,13 @@ const app = express()
 const port = 8000
 
 const acrosureClient = new AcrosureClient({
-  token: 'tokn_sample_secret'
+  token: process.env.TEST_SECRET_TOKEN,
+  apiURL: process.env.TEST_API_URL
 })
 
-app.get('/', (req, res) => res.send('<a href="/test-sdk">Test</a>'))
+app.get('/', (req, res) =>
+  res.send('<a href="/test-sdk"><button>Test</button></a>')
+)
 
 app.get('/test-sdk', async (req, res) => {
   let applicationId = ''
