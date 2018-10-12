@@ -2,6 +2,7 @@ require('dotenv').config()
 
 export const TEST_PUBLIC_TOKEN = process.env.TEST_PUBLIC_TOKEN
 export const TEST_SECRET_TOKEN = process.env.TEST_SECRET_TOKEN
+export const TEST_API_URL = process.env.TEST_API_URL
 
 export const SUBMIT_APP_DATA = {
   product_id: 'prod_contractor',
@@ -88,48 +89,76 @@ export const SUBMIT_APP_DATA = {
 }
 
 export const CONFIRM_APP_DATA = {
-  product_id: 'prod_fire',
+  product_id: 'prod_ta',
   basic_data: {
-    building_area_sq_m: 100,
-    building_material: 'FULL_CONCRETE',
-    building_type: 'SINGLE_HOUSE',
-    coverage_year: 1,
-    effective_date: '2018-10-02'
+    countries: ['GERMANY', 'JAPAN'],
+    policy_date: '2018-12-11',
+    expiry_date: '2018-12-18',
+    policy_unit: 'D'
   },
-  package_options: null,
+  package_options: {
+    insurer_count: 2
+  },
   additional_data: {
-    is_insured_building_owner: true,
-    building_address: {
-      address_no: '1',
-      moo: '2',
-      village: 'วิลเลจ 3',
-      alley: '',
-      lane: 'ลาดพร้าว 4',
-      street: 'ลาดพร้าว',
-      minor_district: '',
-      subdistrict: 'จอมพล',
-      district: 'จตุจักร',
-      province: 'กรุงเทพมหานคร',
-      postal_code: '10900'
-    },
-    building_roof_structure: 'เหล็ก',
-    building_roof_type: 'กระเบื้อง',
-    building_second_floor_type: '',
-    building_total_floors: 2,
-    insured_person: {
-      type: '1',
-      title: 'นาย',
-      first_name: 'มานะ',
-      last_name: 'มุ่งมั่น',
-      birthdate: '1988-10-14',
-      id_card: '1489900087857',
-      branch_name: '',
-      address: null,
-      phone: '0861234567',
-      email: 'customer@example.com',
-      custom_beneficiary: false,
-      beneficiary_person: null
-    },
-    other_insured_person_1: null
+    customer_title: 'MR.',
+    customer_first_name: 'MANA',
+    customer_last_name: 'MUNGMARN',
+    company_name: '-',
+    card_type: 'I',
+    id_card: '1489900087857',
+    email: 'developer@example.com',
+    phone: '0810000000',
+    insurer_list: [
+      {
+        title: 'MR.',
+        first_name: 'MANA',
+        last_name: 'MUNGMARN',
+        card_type: 'I',
+        id_card: '1489900087857',
+        birthdate: '1988-10-14',
+        email: 'developer@example.com',
+        phone: '0812345678',
+        nominee: '',
+        relationship: '',
+        address: {
+          address_no: '1',
+          moo: '2',
+          village: 'VILLAGE',
+          alley: '',
+          lane: 'LAD PRAO 4',
+          street: 'LAD PRAO',
+          minor_district: '',
+          subdistrict: 'Chomphon',
+          district: 'Chatuchak',
+          province: 'Bangkok',
+          postal_code: '10900'
+        }
+      },
+      {
+        title: 'MR.',
+        first_name: 'MANEE',
+        last_name: 'MUNGMARN',
+        card_type: 'I',
+        id_card: '1682086540364',
+        birthdate: '1988-12-31',
+        email: 'developer@example.com',
+        phone: '0812345678',
+        nominee: 'MR. MANOCH MUNGMARN',
+        relationship: 'Brother/Sister',
+        address: {
+          address_no: '1',
+          moo: '2',
+          village: 'VILLAGE',
+          alley: '',
+          lane: 'LAD PRAO 4',
+          street: 'LAD PRAO',
+          minor_district: '',
+          subdistrict: 'Chomphon',
+          district: 'Chatuchak',
+          province: 'Bangkok',
+          postal_code: '10900'
+        }
+      }
+    ]
   }
 }

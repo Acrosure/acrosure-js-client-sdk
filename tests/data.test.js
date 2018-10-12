@@ -1,11 +1,12 @@
 import AcrosureClient from '../src'
 import DataManager from '../src/DataManager'
 
-import { TEST_PUBLIC_TOKEN } from './const'
+import { TEST_PUBLIC_TOKEN, TEST_API_URL } from './const'
 
 const getDataManager = () => {
   const client = new AcrosureClient({
-    token: TEST_PUBLIC_TOKEN
+    token: TEST_PUBLIC_TOKEN,
+    apiURL: TEST_API_URL
   })
   return client.data
 }

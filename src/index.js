@@ -60,6 +60,7 @@ class AcrosureClient {
     this.team = new TeamManager({
       callAPI
     })
+    this.apiURL = args.apiURL
   }
 
   /**
@@ -69,7 +70,7 @@ class AcrosureClient {
    * @param {Object} data - A data object which is specified by Acrosure.
    */
   callAPI(path, data) {
-    return api(path, data, this.token)
+    return api(path, data, this.token, this.apiURL)
   }
 
   /**

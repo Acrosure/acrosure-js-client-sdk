@@ -1,9 +1,8 @@
 import 'isomorphic-fetch'
 
-const API_URL = 'https://api.phantompage.com'
-// const API_URL = 'http://localhost:8000'
+const API_URL = 'https://api.acrosure.com'
 
-const api = async (path, body, token) => {
+const api = async (path, body, token, apiURL) => {
   try {
     const headers = {
       'Content-Type': 'application/json'
@@ -11,7 +10,8 @@ const api = async (path, body, token) => {
     if (token) {
       headers.Authorization = `Bearer ${token}`
     }
-    const response = await fetch(`${API_URL}${path}`, {
+    const targetAPI = apiURL || API_URL
+    const response = await fetch(`${targetAPI}${path}`, {
       method: 'POST',
       headers,
       body: body ? JSON.stringify(body) : '{}'
@@ -20,6 +20,9 @@ const api = async (path, body, token) => {
       throw new Error('no response')
     }
     const data = await response.json()
+    if (data.status !== 'ok') {
+      console.warn(data)
+    }
     return data
   } catch (err) {
     console.warn(err)

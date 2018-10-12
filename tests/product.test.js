@@ -1,13 +1,14 @@
 import AcrosureClient from '../src'
 import ProductManager from '../src/ProductManager'
 
-import { TEST_PUBLIC_TOKEN } from './const'
+import { TEST_PUBLIC_TOKEN, TEST_API_URL } from './const'
 
 const TEST_PRODUCT_ID = process.env.TEST_PRODUCT_ID
 
 const getProductManager = () => {
   const client = new AcrosureClient({
-    token: TEST_PUBLIC_TOKEN
+    token: TEST_PUBLIC_TOKEN,
+    apiURL: TEST_API_URL
   })
   return client.product
 }

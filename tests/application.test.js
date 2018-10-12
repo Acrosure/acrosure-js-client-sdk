@@ -4,13 +4,15 @@ import ApplicationManager from '../src/ApplicationManager'
 import {
   TEST_PUBLIC_TOKEN,
   TEST_SECRET_TOKEN,
+  TEST_API_URL,
   SUBMIT_APP_DATA,
   CONFIRM_APP_DATA
 } from './const'
 
-const getApplicationManager = () => {
+const getApplicationManager = token => {
   const client = new AcrosureClient({
-    token: TEST_PUBLIC_TOKEN
+    token: token || TEST_PUBLIC_TOKEN,
+    apiURL: TEST_API_URL
   })
   return client.application
 }
@@ -118,10 +120,8 @@ describe('application with SUBMIT flow', () => {
   })
 
   it('submit application', async () => {
-    const client = new AcrosureClient({
-      token: TEST_SECRET_TOKEN
-    })
-    const resp = await client.application.submit(applicationId)
+    const application = getApplicationManager()
+    const resp = await application.submit(applicationId)
     expect(resp.status).toBe('ok')
     const submittedApp = resp.data
     expect(submittedApp).toBeDefined()
@@ -226,14 +226,12 @@ describe('application with CONFIRM flow', () => {
   it(
     'confirm application',
     async () => {
-      const client = new AcrosureClient({
-        token: TEST_SECRET_TOKEN
-      })
-      const resp = await client.application.confirm(applicationId)
-      const confirmedApp = resp.data
-      expect(confirmedApp).toBeDefined()
-      expect(confirmedApp.id).toBeDefined()
-      expect(confirmedApp.status).toBe('CONFIRMING')
+      const application = getApplicationManager(TEST_SECRET_TOKEN)
+      const resp = await application.confirm(applicationId)
+      const policies = resp.data
+      expect(policies.length).toBeGreaterThan(0)
+      expect(policies[0].id).toBeDefined()
+      expect(policies[0].application_id).toBe(applicationId)
     },
     30000
   )
@@ -241,8 +239,8 @@ describe('application with CONFIRM flow', () => {
 
 describe('application remaining endpoints', () => {
   it('list applications', async () => {
-    const client = new AcrosureClient({ token: TEST_PUBLIC_TOKEN })
-    const resp = await client.application.list()
+    const application = getApplicationManager()
+    const resp = await application.list()
     expect(resp.status).toBe('ok')
     const applications = resp.data
     expect(applications).toBeInstanceOf(Array)
