@@ -1,10 +1,13 @@
 <html>
 
 <body>
+  <div>You can specify <b>token</b> and <b>apiURL</b> in query params.</div>
+  <br>
   <button onclick="acrosureTest()">Test</button>
+  <br><br>
   <div id="content"><i>Click above button</i></div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/@acrosure/js-sdk@latest/dist/acrosure-sdk.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@acrosure/js-sdk@1.0.3/dist/acrosure-sdk.js"></script>
 <script>
   const APP_DATA = {
     product_id: 'prod_ta',
@@ -99,8 +102,10 @@
       document.getElementById("content").innerHTML = "no token in query params";
       return
     }
+    const apiURL = getQueryVariable('apiURL')
     const acrosureClient = new AcrosureClient({
-      token: token
+      token: token,
+      apiURL: apiURL
     })
     acrosureClient.application.create({
       product_id: APP_DATA.product_id,
