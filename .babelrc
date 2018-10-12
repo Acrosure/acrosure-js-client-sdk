@@ -1,13 +1,4 @@
 {
   "presets": ["env", "es2015"],
-  "plugins": [
-    "add-module-exports",
-    [
-      "transform-runtime",
-      {
-        "polyfill": false,
-        "regenerator": true
-      }
-    ]
-  ]
+  "plugins": ["add-module-exports", "transform-runtime"]
 }

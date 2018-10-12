@@ -2,10 +2,11 @@
 # yarn lockfile v1
 
 
-"@acrosure/js-sdk@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@acrosure/js-sdk/-/js-sdk-1.0.3.tgz#70e8c936db39cf13bac77a7cad913981e95a77ed"
+"@acrosure/js-sdk@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@acrosure/js-sdk/-/js-sdk-1.0.5.tgz#76ecb931baefa3bd37965857c10c75271aa314e1"
   dependencies:
+    babel-runtime "^6.26.0"
     isomorphic-fetch "^2.2.1"
 
 accepts@~1.3.5:
@@ -18,6 +19,13 @@ accepts@~1.3.5:
 array-flatten@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
+
+babel-runtime@^6.26.0:
+  version "6.26.0"
+  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
+  dependencies:
+    core-js "^2.4.0"
+    regenerator-runtime "^0.11.0"
 
 body-parser@1.18.3:
   version "1.18.3"
@@ -53,6 +61,10 @@ cookie-signature@1.0.6:
 cookie@0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
+
+core-js@^2.4.0:
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
 
 debug@2.6.9:
   version "2.6.9"
@@ -267,6 +279,10 @@ raw-body@2.3.3:
     http-errors "1.6.3"
     iconv-lite "0.4.23"
     unpipe "1.0.0"
+
+regenerator-runtime@^0.11.0:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
 
 safe-buffer@5.1.2:
   version "5.1.2"
