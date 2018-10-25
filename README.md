@@ -25,6 +25,12 @@ import AcrosureClient from '@acrosure/js-sdk'
 const AcrosureClient = require('@acrosure/js-sdk')
 ```
 
+or use cdn:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@acrosure/js-sdk@1.0.6/dist/acrosure-sdk.js"></script>
+```
+
 Instantiate with an API key from [Acrosure Dashboard](https://dashboard.acrosure.com).
 
 _If you're using this on client-side, DO NOT use your secret token._
